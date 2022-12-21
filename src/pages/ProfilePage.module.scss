@@ -1,0 +1,111 @@
+.container {
+  display: flex;
+  flex-direction: column;
+  gap: 30px;
+  > section {
+    padding-bottom: 30px;
+    border-bottom: 1px solid #f1f4f7;
+    .section-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      width: 100%;
+      font-weight: bold;
+
+      .header-text {
+        font-size: var(--font-h3);
+      }
+      .header-button {
+        cursor: pointer;
+        color: var(--color-primary);
+      }
+    }
+  }
+  .section-profile {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    gap: 20px;
+    .profile-image-box {
+      width: 120px;
+      height: 120px;
+      img {
+        width: 100%;
+        height: 100%;
+        border-radius: 50%;
+        object-fit: cover;
+      }
+    }
+    .username-box {
+      font-weight: bold;
+      font-size: var(--font-h3);
+    }
+    .user-info-list {
+      display: flex;
+      gap: 10px;
+      .info-item {
+        background-color: var(--color-secondary);
+        color: var(--color-primary);
+        border-radius: 40px;
+        padding: 5px 10px;
+        font-weight: bold;
+        flex-wrap: wrap;
+      }
+    }
+    .bio-box {
+      display: flex;
+      align-items: center;
+      box-sizing: border-box;
+      background-color: #f1f4f7;
+      width: 100%;
+      min-height: 70px;
+      padding: 10px 15px;
+      border-radius: 12px;
+      font-size: var(--font-h5);
+    }
+  }
+  .section-apply {
+    .section-header {
+      margin-bottom: 20px;
+    }
+    .apply-list {
+      display: flex;
+      flex-direction: column;
+      gap: 15px;
+    }
+  }
+  .section-jobpost {
+    .jobpost-list {
+      display: flex;
+      flex-direction: column;
+      gap: 30px;
+      padding-top: 30px;
+    }
+  }
+  .section-github {
+    .github-data-list {
+      display: flex;
+      flex-direction: column;
+      gap: 50px;
+      padding-top: 30px;
+
+      .github-item-box {
+        display: flex;
+        flex-direction: column;
+        gap: 30px;
+        .header {
+          font-size: var(--font-h5);
+          font-weight: bold;
+          color: var(--color-third);
+        }
+      }
+
+      .github-repo-list {
+        display: flex;
+        flex-direction: column;
+        gap: 20px;
+      }
+    }
+  }
+}

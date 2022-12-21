@@ -1,0 +1,88 @@
+.container {
+  transition: all 0.5s;
+  cursor: pointer;
+  box-sizing: border-box;
+
+  display: flex;
+  flex-direction: column;
+  padding: 15px 18px;
+  gap: 15px;
+
+  background: #ffffff;
+  border: 1px solid #f4f6f9;
+
+  box-shadow: 12px 26px 50px rgba(90, 108, 234, 0.08);
+  border-radius: 5px;
+
+  flex: none;
+  order: 1;
+  align-self: stretch;
+  flex-grow: 0;
+
+  .repo-header {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+
+    .repo-owner-avatar-box {
+      width: 50px;
+      height: 50px;
+      img {
+        border-radius: 4px;
+        width: 100%;
+      }
+    }
+
+    .repo-profile {
+      flex: 1;
+      display: flex;
+      flex-direction: column;
+      gap: 5px;
+
+      .repo-name-info-list {
+        display: flex;
+        gap: 5px;
+        align-items: center;
+
+        .repo-name {
+          font-weight: bold;
+          font-size: var(--font-h5);
+        }
+        .private-tag {
+          background-color: rgb(250, 250, 250);
+          border: 1px solid rgb(240, 240, 240);
+          border-radius: 50px;
+          padding: 0px 8px;
+          font-size: var(--font-h7);
+        }
+      }
+
+      .repo-name-with-owner {
+        font-size: var(--font-h5);
+        color: var(--color-third);
+      }
+    }
+  }
+
+  .repo-langauge-list {
+    display: flex;
+    gap: 10px;
+    flex-wrap: wrap;
+    font-size: var(--font-h6);
+    color: var(--color-third);
+
+    .repo-language-item {
+      border: 1px solid rgb(240, 240, 240);
+      border-radius: 9px;
+      padding: 5px 10px;
+      display: flex;
+      align-items: center;
+      gap: 4px;
+      .ellipse {
+        width: 14px;
+        height: 14px;
+        border-radius: 50%;
+      }
+    }
+  }
+}

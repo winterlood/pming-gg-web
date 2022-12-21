@@ -1,0 +1,118 @@
+.container {
+  height: 100%;
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+
+  .section-body {
+    flex: 1;
+
+    .scene-type-select {
+      display: flex;
+      flex-direction: column;
+      gap: 20px;
+      .type-item:hover {
+        border: 1px solid var(--color-primary);
+        background-color: var(--color-secondary);
+      }
+      .type-item-selected {
+        border: 1px solid var(--color-primary) !important;
+        background-color: var(--color-secondary) !important;
+      }
+      .type-item {
+        transition: all 0.5s;
+        cursor: pointer;
+        box-sizing: border-box;
+
+        display: flex;
+        flex-direction: row;
+        align-items: center;
+        padding: 15px 18px;
+        gap: 20px;
+
+        background: #ffffff;
+        border: 1px solid #f4f6f9;
+
+        box-shadow: 12px 26px 50px rgba(90, 108, 234, 0.08);
+        border-radius: 5px;
+
+        flex: none;
+
+        .icon-box {
+          display: flex;
+          justify-content: center;
+          align-items: center;
+          background-color: var(--color-secondary);
+          padding: 15px;
+          border-radius: 50%;
+          width: 20px;
+          height: 20px;
+          color: var(--color-primary);
+          font-weight: bold;
+        }
+        .info-box {
+          .title {
+            font-weight: bold;
+            font-size: var(--font-h4);
+          }
+          .descript {
+            color: var(--color-third);
+          }
+        }
+      }
+    }
+
+    .scene-individual,
+    .scene-business {
+      display: flex;
+      flex-direction: column;
+      gap: 30px;
+    }
+    .scene-avatar {
+      .image-input-box {
+        position: relative;
+        cursor: pointer;
+        width: 120px;
+        height: 120px;
+        border-radius: 50%;
+
+        img {
+          width: 100%;
+          height: 100%;
+          border-radius: 50%;
+          object-fit: cover;
+        }
+
+        .image-edit-icon-box {
+          border: 1px solid var(--color-secondary);
+          background-color: var(--color-secondary);
+          color: var(--color-primary);
+          width: 25px;
+          height: 25px;
+          display: flex;
+          justify-content: center;
+          align-items: center;
+          padding: 5px;
+          border-radius: 50%;
+          position: absolute;
+          bottom: 0;
+          right: 0;
+        }
+      }
+    }
+    .scene-finish {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      img {
+        width: 100%;
+      }
+    }
+  }
+
+  .section-footer {
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+  }
+}

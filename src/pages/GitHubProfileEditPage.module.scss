@@ -1,0 +1,92 @@
+.container {
+  display: flex;
+  flex-direction: column;
+  gap: 40px;
+  padding-bottom: 80px;
+
+  .inner {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    gap: 20px;
+    section {
+      padding-bottom: 20px;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      gap: 15px;
+    }
+    section > .section-header {
+      font-weight: bold;
+      font-size: var(--font-h3);
+      color: var(--color-third);
+      margin-bottom: 15px;
+      .header-descript {
+        margin-top: 5px;
+        font-size: var(--font-h4);
+        font-weight: normal;
+      }
+    }
+    .section-profile {
+      text-align: center;
+      border-bottom: 1px solid rgb(240, 240, 240);
+
+      .avatar-box {
+        width: 120px;
+        height: 120px;
+        margin: 0 auto;
+        img {
+          width: 100%;
+          border-radius: 50%;
+        }
+      }
+      .name-box {
+        font-size: var(--font-h1);
+        font-weight: bold;
+      }
+      .stat-box {
+        display: flex;
+        justify-content: center;
+        gap: 10px;
+        color: gray;
+        b {
+          color: black;
+        }
+      }
+      .top-language-list {
+        display: flex;
+        justify-content: center;
+        gap: 10px;
+
+        .top-lanaguage {
+          padding: 5px 9px;
+          background-color: var(--color-secondary);
+          color: var(--color-primary);
+          border-radius: 5px;
+          font-weight: bold;
+          font-size: var(--font-h6);
+        }
+      }
+    }
+    .section-general-stat {
+    }
+    .section-repos {
+      padding-top: 20px;
+      border-top: 1px solid rgb(240, 240, 240);
+      .repo-list-box {
+        display: flex;
+        flex-direction: column;
+        gap: 20px;
+
+        .repo-item:hover {
+          border: 1px solid var(--color-primary);
+          background-color: var(--color-secondary);
+        }
+        .repo-item-selected {
+          border: 1px solid var(--color-primary) !important;
+          background-color: var(--color-secondary) !important;
+        }
+      }
+    }
+  }
+}

@@ -1,0 +1,13 @@
+.labeled-input-container {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  width: 100%;
+
+  .label {
+    font-size: var(--font-h6);
+    font-weight: bold;
+    color: var(--color-third);
+    padding-left: 14px;
+  }
+}
