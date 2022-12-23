@@ -4,13 +4,17 @@ declare module "@types" {
       id: string;
       is_matched: boolean;
       job_post: JobPost;
+      apply_user: UserProfile;
+      updatedAt: string;
     }
 
     interface JobOffer {
+      id: string;
       job_post: JobPost;
       offer_message: string;
-      offer_received_user: string;
-      offer_send_user: string;
+      offer_received_user: UserProfile;
+      offer_send_user: UserProfile;
+      updatedAt: string;
     }
 
     interface JobPost {

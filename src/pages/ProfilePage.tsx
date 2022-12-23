@@ -54,10 +54,13 @@ function ProfilePage() {
       enabled: !!id && userType === "business",
     });
   const { data: applyQueryData, isLoading: applyQueryLoading } =
-    useGetApplyQuery(id as string, {
-      refetchOnMount: true,
-      enabled: !!id && userType === "individual",
-    });
+    useGetApplyQuery(
+      { apply_user_id: id as string },
+      {
+        refetchOnMount: true,
+        enabled: !!id && userType === "individual",
+      }
+    );
   const { data: profileQueryData, isLoading: profileQueryLoading } =
     useGetProfileQuery(id as string, {
       refetchOnMount: true,

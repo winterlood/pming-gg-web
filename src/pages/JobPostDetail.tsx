@@ -12,32 +12,51 @@ import { useEffect, useState } from "react";
 import Button from "@components/Button";
 import useDeleteJobPostMutation from "@hooks/useDeleteJobPostMutation";
 import useCreateApplyMutation from "@hooks/useCraeteApplyMutation";
+import useGetApplyQuery from "@hooks/useGetApplyQuery";
+import DeveloperItem from "@components/DeveloperItem";
+import useGetOfferQuery from "@hooks/useGetOfferQuery";
 const cx = classNames.bind(style);
 
 function JobPostDetail() {
   const nav = useNavigate();
   const auth = useSelector((v: RootState) => v.auth?.user);
-  const { id } = useParams();
+  const { id: JobPostID } = useParams();
   const deleteJobPostMutation = useDeleteJobPostMutation();
   const createApplyMutation = useCreateApplyMutation();
-  const { data, isLoading } = useGetJobPostDetailQuery(id as string, {
-    staleTime: 0,
-    refetchOnMount: true,
-    enabled: !!id,
-  });
+  const { data: jobPostData, isLoading: jobPostDataLoading } =
+    useGetJobPostDetailQuery(JobPostID as string, {
+      staleTime: 0,
+      refetchOnMount: true,
+      enabled: !!JobPostID,
+    });
+
+  const { data: applyData, isLoading: applyDataLoading } = useGetApplyQuery(
+    {
+      job_post_id: JobPostID,
+    },
+    { refetchOnMount: true, enabled: !!JobPostID }
+  );
+
+  const { data: offerData, isLoading: offerDataLoading } = useGetOfferQuery(
+    {
+      job_post_id: JobPostID,
+    },
+    { refetchOnMount: true, enabled: !!JobPostID }
+  );
+
   const [isMine, setIsMine] = useState(false);
 
   useEffect(() => {
-    if (data && auth) {
-      if (data.author.id === auth.id) {
+    if (jobPostData && auth) {
+      if (jobPostData.author.id === auth.id) {
         setIsMine(true);
       }
     }
-  }, [data]);
+  }, [jobPostData]);
 
   const onClickDelete = () => {
     if (window.confirm("정말 삭제하시겠습니까?")) {
-      deleteJobPostMutation.mutate(id, {
+      deleteJobPostMutation.mutate(JobPostID, {
         onSuccess: () => {
           alert("공고가 삭제되었습니다!");
           nav("/");
@@ -52,7 +71,7 @@ function JobPostDetail() {
   const onClickApply = () => {
     if (window.confirm("정말 지원하시겠습니까?")) {
       createApplyMutation.mutate(
-        { jobPostId: id },
+        { jobPostId: JobPostID },
         {
           onSuccess: () => {
             alert("지원되었습니다");
@@ -83,44 +102,49 @@ function JobPostDetail() {
             type={"light"}
             icon={"edit"}
             onClick={() => {
-              nav(`/jobpost/edit/${id}`);
+              nav(`/jobpost/edit/${JobPostID}`);
             }}
           />
         ),
       }}
-      isLoading={isLoading || deleteJobPostMutation.isLoading}
+      isLoading={jobPostDataLoading || deleteJobPostMutation.isLoading}
     >
       <div className={cx("container")}>
-        {data && (
+        {jobPostData && (
           <>
-            {data?.thumbnail_url && (
+            {jobPostData?.thumbnail_url && (
               <section className={cx("section-thumbnail")}>
-                <img src={data?.thumbnail_url} alt={"job post thumbnail"} />
+                <img
+                  src={jobPostData?.thumbnail_url}
+                  alt={"job post thumbnail"}
+                />
               </section>
             )}
             <section className={cx("section-head")}>
-              <JobPostItem disabled {...data} />
+              <JobPostItem disabled {...jobPostData} />
             </section>
             <section className={cx("section-summary")}>
               <div className={cx("summary-item")}>
                 <div className={cx("label")}>연봉</div>
-                <div className={cx("value")}>{data.salary} 만원</div>
+                <div className={cx("value")}>{jobPostData.salary} 만원</div>
               </div>
               <div className={cx("summary-item")}>
                 <div className={cx("label")}>방식</div>
                 <div className={cx("value")}>
-                  {data.work_type === "full-time" ? "풀타임" : "파트타임"}
+                  {jobPostData.work_type === "full-time"
+                    ? "풀타임"
+                    : "파트타임"}
                 </div>
               </div>
               <div className={cx("summary-item")}>
                 <div className={cx("label")}>지역</div>
-                <div className={cx("value")}>{data.location}</div>
+                <div className={cx("value")}>{jobPostData.location}</div>
               </div>
             </section>
             <section className={cx("section-requirements")}>
               <div className={cx("header")}>이런 분을 원해요</div>
               <div className={cx("requirement_list")}>
-                {data.requirements.map((require, idx) => (
+                {jobPostData.requirements.map((require, idx) => (
                   <div
                     key={`require-${idx}`}
                     className={cx("requirement-item")}
@@ -131,6 +155,55 @@ function JobPostDetail() {
                 ))}
               </div>
             </section>
+            {isMine && (
+              <section className={cx("section_offer")}>
+                <div className={cx("header")}>내가 보낸 제안</div>
+                <div className={cx("apply_list")}>
+                  {offerData?.map((it) => (
+                    <div className={cx("apply_item")} key={it.id}>
+                      <div className={cx("label")}>
+                        {new Date(it.updatedAt).toLocaleDateString()} 제안
+                      </div>
+                      <DeveloperItem
+                        isContactAble
+                        onClick={() => {}}
+                        id={it.offer_received_user.id}
+                        avatar_url={it.offer_received_user.avatar_url}
+                        name={it.offer_received_user.username}
+                        bio={
+                          it.offer_received_user.user_detail_individual
+                            ?.bio as string
+                        }
+                      />
+                    </div>
+                  ))}
+                </div>
+              </section>
+            )}
+            {isMine && (
+              <section className={cx("section_apply")}>
+                <div className={cx("header")}>지원자</div>
+                <div className={cx("apply_list")}>
+                  {applyData?.map((it) => (
+                    <div className={cx("apply_item")} key={it.id}>
+                      <div className={cx("label")}>
+                        {new Date(it.updatedAt).toLocaleDateString()} 지원
+                      </div>
+                      <DeveloperItem
+                        onClick={() => {}}
+                        isContactAble
+                        id={it.apply_user.id}
+                        avatar_url={it.apply_user.avatar_url}
+                        name={it.apply_user.username}
+                        bio={
+                          it.apply_user.user_detail_individual?.bio as string
+                        }
+                      />
+                    </div>
+                  ))}
+                </div>
+              </section>
+            )}
             <section className={cx("section-submit")}>
               {isMine ? (
                 <>

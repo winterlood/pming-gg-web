@@ -30,6 +30,7 @@
     }
   }
   .info_col {
+    flex: 1;
     display: flex;
     flex-direction: column;
     gap: 3px;
@@ -41,5 +42,9 @@
       font-size: var(--font-h7);
       color: var(--color-third);
     }
+  }
+  .contact_col {
+    width: 200px;
+    display: flex;
   }
 }
