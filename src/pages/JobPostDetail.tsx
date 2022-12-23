@@ -158,50 +158,58 @@ function JobPostDetail() {
             {isMine && (
               <section className={cx("section_offer")}>
                 <div className={cx("header")}>내가 보낸 제안</div>
-                <div className={cx("apply_list")}>
-                  {offerData?.map((it) => (
-                    <div className={cx("apply_item")} key={it.id}>
-                      <div className={cx("label")}>
-                        {new Date(it.updatedAt).toLocaleDateString()} 제안
+                {offerData && offerData.length > 0 ? (
+                  <div className={cx("apply_list")}>
+                    {offerData?.map((it) => (
+                      <div className={cx("apply_item")} key={it.id}>
+                        <div className={cx("label")}>
+                          {new Date(it.updatedAt).toLocaleDateString()} 제안
+                        </div>
+                        <DeveloperItem
+                          isContactAble
+                          onClick={() => {}}
+                          id={it.offer_received_user.id}
+                          avatar_url={it.offer_received_user.avatar_url}
+                          name={it.offer_received_user.username}
+                          bio={
+                            it.offer_received_user.user_detail_individual
+                              ?.bio as string
+                          }
+                        />
                       </div>
-                      <DeveloperItem
-                        isContactAble
-                        onClick={() => {}}
-                        id={it.offer_received_user.id}
-                        avatar_url={it.offer_received_user.avatar_url}
-                        name={it.offer_received_user.username}
-                        bio={
-                          it.offer_received_user.user_detail_individual
-                            ?.bio as string
-                        }
-                      />
-                    </div>
-                  ))}
-                </div>
+                    ))}
+                  </div>
+                ) : (
+                  <div>아직 보낸 제안이 없습니다</div>
+                )}
               </section>
             )}
             {isMine && (
               <section className={cx("section_apply")}>
                 <div className={cx("header")}>지원자</div>
-                <div className={cx("apply_list")}>
-                  {applyData?.map((it) => (
-                    <div className={cx("apply_item")} key={it.id}>
-                      <div className={cx("label")}>
-                        {new Date(it.updatedAt).toLocaleDateString()} 지원
+                {applyData && applyData?.length > 0 ? (
+                  <div className={cx("apply_list")}>
+                    {applyData?.map((it) => (
+                      <div className={cx("apply_item")} key={it.id}>
+                        <div className={cx("label")}>
+                          {new Date(it.updatedAt).toLocaleDateString()} 지원
+                        </div>
+                        <DeveloperItem
+                          onClick={() => {}}
+                          isContactAble
+                          id={it.apply_user.id}
+                          avatar_url={it.apply_user.avatar_url}
+                          name={it.apply_user.username}
+                          bio={
+                            it.apply_user.user_detail_individual?.bio as string
+                          }
+                        />
                       </div>
-                      <DeveloperItem
-                        onClick={() => {}}
-                        isContactAble
-                        id={it.apply_user.id}
-                        avatar_url={it.apply_user.avatar_url}
-                        name={it.apply_user.username}
-                        bio={
-                          it.apply_user.user_detail_individual?.bio as string
-                        }
-                      />
-                    </div>
-                  ))}
-                </div>
+                    ))}
+                  </div>
+                ) : (
+                  <div>아직 지원자가 없습니다</div>
+                )}
               </section>
             )}
             <section className={cx("section-submit")}>
