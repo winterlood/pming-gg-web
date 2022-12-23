@@ -18,6 +18,7 @@ import JobRecommendPage from "@pages/JobListPage";
 import JobListPage from "@pages/JobListPage";
 import DeveloperListPage from "@pages/DeveloperListPage";
 import DirectOfferPage from "@pages/DirectOfferPage";
+import ContactPage from "@pages/ContactPage";
 
 function App() {
   return (
@@ -58,6 +59,7 @@ function App() {
 
           <Route path="/developers" element={<DeveloperListPage />} />
           <Route path="/direct-offer/:id" element={<DirectOfferPage />} />
+          <Route path="/contact/:id" element={<ContactPage />} />
         </Routes>
       </BrowserRouter>
     </div>

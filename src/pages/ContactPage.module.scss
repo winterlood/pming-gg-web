@@ -1,0 +1,36 @@
+.container {
+  display: flex;
+  flex-direction: column;
+  gap: 40px;
+  .section_developer {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+    gap: 20px;
+    .avatar_row {
+      img {
+        width: 60px;
+        height: 60px;
+        border-radius: 50%;
+      }
+    }
+    .info_row {
+      display: flex;
+      flex-direction: column;
+      gap: 5px;
+      .name {
+        font-weight: bold;
+        font-size: var(--font-h3);
+      }
+      .bio {
+        font-size: var(--font-h6);
+      }
+    }
+  }
+  .section_notice {
+    flex: 1;
+  }
+  .section_submit {
+  }
+}

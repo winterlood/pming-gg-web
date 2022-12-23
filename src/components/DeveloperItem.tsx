@@ -51,7 +51,7 @@ function DeveloperItem({
           </Button>
           <Button
             onClick={() => {
-              alert("TODO");
+              nav(`/contact/${id}`);
             }}
           >
             연락하기
