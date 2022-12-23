@@ -8,27 +8,32 @@ import JobPostItem from "@components/JobPostItem";
 import TaskAltIcon from "@mui/icons-material/TaskAlt";
 import { useSelector } from "react-redux";
 import { RootState } from "@store/createStore";
-import { useEffect, useState } from "react";
+import { useEffect, useMemo, useState } from "react";
 import Button from "@components/Button";
 import useDeleteJobPostMutation from "@hooks/useDeleteJobPostMutation";
 import useCreateApplyMutation from "@hooks/useCraeteApplyMutation";
 import useGetApplyQuery from "@hooks/useGetApplyQuery";
 import DeveloperItem from "@components/DeveloperItem";
 import useGetOfferQuery from "@hooks/useGetOfferQuery";
+import useDeleteApplyMutation from "@hooks/useDeleteApplyMutation";
 const cx = classNames.bind(style);
 
 function JobPostDetail() {
   const nav = useNavigate();
-  const auth = useSelector((v: RootState) => v.auth?.user);
+  const user = useSelector((v: RootState) => v.auth?.user);
   const { id: JobPostID } = useParams();
   const deleteJobPostMutation = useDeleteJobPostMutation();
   const createApplyMutation = useCreateApplyMutation();
+  const deleteApplyMutation = useDeleteApplyMutation();
+
   const { data: jobPostData, isLoading: jobPostDataLoading } =
     useGetJobPostDetailQuery(JobPostID as string, {
       staleTime: 0,
       refetchOnMount: true,
       enabled: !!JobPostID,
     });
+
+  const [isMine, setIsMine] = useState(false);
 
   const { data: applyData, isLoading: applyDataLoading } = useGetApplyQuery(
     {
@@ -44,11 +49,9 @@ function JobPostDetail() {
     { refetchOnMount: true, enabled: !!JobPostID }
   );
 
-  const [isMine, setIsMine] = useState(false);
-
   useEffect(() => {
-    if (jobPostData && auth) {
-      if (jobPostData.author.id === auth.id) {
+    if (jobPostData && user) {
+      if (jobPostData.author.id === user.id) {
         setIsMine(true);
       }
     }
@@ -83,6 +86,30 @@ function JobPostDetail() {
       );
     }
   };
+
+  const onClickCancleApply = () => {
+    if (window.confirm("정말 지원 취소하시겠습니까?")) {
+      deleteApplyMutation.mutate(myApplyID, {
+        onSuccess: () => {
+          alert("지원이 취소되었습니다");
+          nav(`/profile/${user?.id}`);
+        },
+        onError: () => {
+          alert("오류가 발생했습니다. 잠시 후 다시 시도해보세요");
+        },
+      });
+    }
+  };
+
+  const myApplyID = useMemo(() => {
+    if (!isMine) {
+      const myApply = applyData?.find((it) => it.apply_user.id === user?.id);
+      if (myApply) {
+        return myApply.id;
+      }
+    }
+    return false;
+  }, [applyData]);
 
   return (
     <Layout
@@ -214,17 +241,17 @@ function JobPostDetail() {
             )}
             <section className={cx("section-submit")}>
               {isMine ? (
-                <>
-                  <Button variant={"outlined"} onClick={onClickDelete}>
-                    공고 삭제하기
-                  </Button>
-                </>
+                <Button variant={"outlined"} onClick={onClickDelete}>
+                  공고 삭제하기
+                </Button>
+              ) : myApplyID ? (
+                <Button variant={"outlined"} onClick={onClickCancleApply}>
+                  지원 취소하기
+                </Button>
               ) : (
-                <>
-                  <Button variant={"contained"} onClick={onClickApply}>
-                    지원하기
-                  </Button>
-                </>
+                <Button variant={"contained"} onClick={onClickApply}>
+                  지원하기
+                </Button>
               )}
             </section>
           </>
