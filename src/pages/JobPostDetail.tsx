@@ -93,9 +93,11 @@ function JobPostDetail() {
       <div className={cx("container")}>
         {data && (
           <>
-            <section className={cx("section-thumbnail")}>
-              <img src={data?.thumbnail_url} />
-            </section>
+            {data?.thumbnail_url && (
+              <section className={cx("section-thumbnail")}>
+                <img src={data?.thumbnail_url} alt={"job post thumbnail"} />
+              </section>
+            )}
             <section className={cx("section-head")}>
               <JobPostItem disabled {...data} />
             </section>

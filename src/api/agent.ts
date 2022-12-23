@@ -14,8 +14,8 @@ export const stroageAgent = axios.create({
 });
 
 const agent = axios.create({
-  // baseURL:  "http://localhost:1337/api",
-  baseURL: "http://34.64.92.51:1337/api",
+  baseURL: "http://localhost:1337/api",
+  // baseURL: "http://34.64.92.51:1337/api",
 });
 
 agent.interceptors.request.use((config) => {

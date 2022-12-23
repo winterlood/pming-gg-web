@@ -17,6 +17,7 @@ import useGetJobPostQuery from "@hooks/useGetJobPostByUserIdQuery";
 import JobPostItem from "@components/JobPostItem";
 import useGetApplyQuery from "@hooks/useGetApplyQuery";
 import useGetJobPostByUserIdQuery from "@hooks/useGetJobPostByUserIdQuery";
+import Button from "@components/Button";
 const cx = classNames.bind(style);
 
 const scope = [
@@ -92,7 +93,7 @@ function ProfilePage() {
   return (
     <Layout
       header={{
-        pageName: isMe ? "내 프로필" : "~~의 프로필",
+        pageName: isMe ? "내 프로필" : `${profileQueryData?.username}의 프로필`,
         rightButton: isMe && (
           <IconButton
             type={"light"}
@@ -149,9 +150,21 @@ function ProfilePage() {
                 )}
               </div>
               {userType === "individual" && (
-                <div className={cx("bio-box")}>
-                  {profileData.user_detail_individual?.bio}
-                </div>
+                <>
+                  <div className={cx("bio-box")}>
+                    {profileData.user_detail_individual?.bio}
+                  </div>
+                  {user?.user_type === "business" && (
+                    <Button
+                      variant="contained"
+                      onClick={() => {
+                        nav(`/direct-offer/${profileData.id}`);
+                      }}
+                    >
+                      제안하기
+                    </Button>
+                  )}
+                </>
               )}
             </section>
             {userType === "business" && (
@@ -178,7 +191,7 @@ function ProfilePage() {
                 )}
               </section>
             )}
-            {userType === "individual" && (
+            {userType === "individual" && isMe ? (
               <section className={cx("section-apply")}>
                 <div className={cx("section-header")}>
                   <div className={cx("header-text")}>내가 지원한 공고</div>
@@ -193,7 +206,7 @@ function ProfilePage() {
                     ))}
                 </div>
               </section>
-            )}
+            ) : null}
             {profileData.github_user && (
               <section className={cx("section-github")}>
                 <div className={cx("section-header")}>

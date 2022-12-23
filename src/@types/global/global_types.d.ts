@@ -68,6 +68,7 @@ declare module "@types" {
       topicList: string[];
       languageList: { name: string; size: number; color: string }[];
     }
+
     interface GitHubProfile {
       avatar_url: string;
       bio: string;

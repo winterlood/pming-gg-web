@@ -16,6 +16,8 @@ import JobPostEditPage from "@pages/JobPostEditPage";
 import JobPostDetail from "@pages/JobPostDetail";
 import JobRecommendPage from "@pages/JobListPage";
 import JobListPage from "@pages/JobListPage";
+import DeveloperListPage from "@pages/DeveloperListPage";
+import DirectOfferPage from "@pages/DirectOfferPage";
 
 function App() {
   return (
@@ -53,6 +55,9 @@ function App() {
           <Route path="/joboffer/:id" element={<div>profile:id</div>} />
           <Route path="/githubconnect" element={<GitHubConnectPage />} />
           <Route path="/github-callback" element={<GitHubCallback />} />
+
+          <Route path="/developers" element={<DeveloperListPage />} />
+          <Route path="/direct-offer/:id" element={<DirectOfferPage />} />
         </Routes>
       </BrowserRouter>
     </div>
