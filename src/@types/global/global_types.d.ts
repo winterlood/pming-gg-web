@@ -6,6 +6,13 @@ declare module "@types" {
       job_post: JobPost;
     }
 
+    interface JobOffer {
+      job_post: JobPost;
+      offer_message: string;
+      offer_received_user: string;
+      offer_send_user: string;
+    }
+
     interface JobPost {
       id: string;
       thumbnail_url: string;

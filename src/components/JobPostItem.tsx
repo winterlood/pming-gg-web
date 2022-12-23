@@ -6,20 +6,33 @@ const cx = classNames.bind(style);
 
 interface Props extends api_types.JobPost {
   disabled?: boolean;
+  onClick?: Function;
+  isHighlight?: boolean;
 }
 function JobPostItem(props: Props) {
   const nav = useNavigate();
+
+  const goDetailPage = () => {
+    if (!props.disabled) {
+      nav(`/jobpost/${props.id}`);
+    }
+  };
+
+  const onClickItem = () => {
+    props.onClick ? props.onClick() : goDetailPage();
+  };
+
   return (
     <div
-      className={cx("container")}
-      onClick={() => {
-        if (!props.disabled) {
-          nav(`/jobpost/${props.id}`);
-        }
-      }}
+      className={
+        props.isHighlight
+          ? cx("container", "container_highligth")
+          : cx("container")
+      }
+      onClick={onClickItem}
     >
       <div className={cx("img-col")}>
-        <img src={props.author.avatar_url} />
+        <img src={props.author.avatar_url} alt={"jp"} />
       </div>
       <div className={cx("info-col")}>
         <div className={cx("duty")}>{props.duty}</div>
