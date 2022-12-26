@@ -1,7 +1,7 @@
 import IconButton from "@components/IconButton";
 import withOnlyProfiledUser from "@hoc/withOnlyProfiledUser";
 import Layout from "@layout/Layout";
-import { RootState } from "@store/createStore";
+import { RootState, useAppDispatch } from "@store/createStore";
 import { useEffect, useMemo, useState } from "react";
 import { useSelector } from "react-redux";
 import { useNavigate, useParams } from "react-router-dom";
@@ -18,6 +18,7 @@ import JobPostItem from "@components/JobPostItem";
 import useGetApplyQuery from "@hooks/useGetApplyQuery";
 import useGetJobPostByUserIdQuery from "@hooks/useGetJobPostByUserIdQuery";
 import Button from "@components/Button";
+import { logout } from "@store/slice/authSlice";
 const cx = classNames.bind(style);
 
 const scope = [
@@ -46,6 +47,7 @@ function ProfilePage() {
 
   const [isMe, setIsMe] = useState(false);
   const user = useSelector((v: RootState) => v.auth?.user);
+  const dispatch = useAppDispatch();
   const { id } = useParams();
 
   const { data: jobPostQueryData, isLoading: jobPostQueryLoading } =
@@ -265,6 +267,17 @@ function ProfilePage() {
                     </div>
                   </div>
                 </div>
+              </section>
+            )}
+            {isMe && (
+              <section>
+                <Button
+                  onClick={() => {
+                    dispatch(logout());
+                  }}
+                >
+                  로그아웃
+                </Button>
               </section>
             )}
           </>
