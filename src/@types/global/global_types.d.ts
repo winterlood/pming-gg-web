@@ -1,5 +1,13 @@
 declare module "@types" {
   export namespace api_types {
+    interface Magazine {
+      id: string;
+      url: string;
+      title: string;
+      createdAt: string;
+      cover: string;
+    }
+
     interface Apply {
       id: string;
       is_matched: boolean;
