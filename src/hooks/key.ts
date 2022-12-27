@@ -17,5 +17,7 @@ const queryKey = {
   getMagazineList: ["magazineList"],
   getNotionPage: (id: string) => ["notionPage", id],
   getNotionPageInfo: (id: string) => ["notionPageInfo", id],
+  getAlarms: ["alarm"],
+  getNewAlarmCount: ["newAlarmCount"],
 };
 export default queryKey;

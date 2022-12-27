@@ -13,6 +13,8 @@ import PersonIcon from "@mui/icons-material/Person";
 import { useLocation, useNavigate } from "react-router-dom";
 import { useSelector } from "react-redux";
 import { RootState } from "@store/createStore";
+import useGetNewAlarmCountQuery from "@hooks/useGetNewAlarmCountQuery";
+import { Badge } from "@mui/material";
 const cx = classNames.bind(style);
 
 function BottomNavi(props: any) {
@@ -23,6 +25,10 @@ function BottomNavi(props: any) {
     "empty"
   );
   const auth = useSelector((v: RootState) => v.auth);
+  const { data: newAlarmCount } = useGetNewAlarmCountQuery({
+    refetchOnMount: true,
+  });
+  console.log(newAlarmCount);
 
   useEffect(() => {
     if (loc.pathname) {
@@ -63,14 +69,20 @@ function BottomNavi(props: any) {
           value=""
           icon={<HomeIcon fontSize={"large"} />}
         />
-
         <BottomNavigationAction
           value={userType === "individual" ? "jobs" : "developers"}
           icon={<FormatListBulletedIcon fontSize={"large"} />}
         />
         <BottomNavigationAction
           value="alarm"
-          icon={<NotificationsIcon fontSize={"large"} />}
+          icon={
+            <Badge
+              badgeContent={value === "alarm" ? 0 : newAlarmCount}
+              color="primary"
+            >
+              <NotificationsIcon fontSize={"large"} />
+            </Badge>
+          }
         />
         <BottomNavigationAction
           value="profile"
