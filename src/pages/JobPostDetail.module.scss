@@ -29,6 +29,17 @@
   }
   .section-head {
   }
+  .section_received_offer {
+    .body {
+      display: flex;
+      flex-direction: column;
+      gap: 10px;
+
+      .offer_message {
+        font-size: var(--font-h4);
+      }
+    }
+  }
   .section_apply {
     .apply_list {
       display: flex;

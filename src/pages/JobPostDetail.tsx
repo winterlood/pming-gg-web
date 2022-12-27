@@ -16,11 +16,13 @@ import useGetApplyQuery from "@hooks/useGetApplyQuery";
 import DeveloperItem from "@components/DeveloperItem";
 import useGetOfferQuery from "@hooks/useGetOfferQuery";
 import useDeleteApplyMutation from "@hooks/useDeleteApplyMutation";
+import useAuthUser from "@hooks/useAuthUser";
 const cx = classNames.bind(style);
 
 function JobPostDetail() {
+  const { user } = useAuthUser();
   const nav = useNavigate();
-  const user = useSelector((v: RootState) => v.auth?.user);
+
   const { id: JobPostID } = useParams();
   const deleteJobPostMutation = useDeleteJobPostMutation();
   const createApplyMutation = useCreateApplyMutation();
@@ -111,6 +113,15 @@ function JobPostDetail() {
     return false;
   }, [applyData]);
 
+  const receivedOffer = useMemo(() => {
+    if (!isMine) {
+      const offer = offerData?.find(
+        (it) => it.offer_received_user.id === user.id
+      );
+      return offer;
+    }
+  }, [offerData]);
+
   return (
     <Layout
       header={{
@@ -182,6 +193,19 @@ function JobPostDetail() {
                 ))}
               </div>
             </section>
+            {user.user_type === "individual" && receivedOffer && (
+              <section className={cx("section_received_offer")}>
+                <div className={cx("header")}>내가 받은 제안</div>
+                <div className={cx("body")}>
+                  <div className={cx("offer_updatedAt")}>
+                    {new Date(receivedOffer.updatedAt).toLocaleDateString()}일
+                  </div>
+                  <div className={cx("offer_message")}>
+                    {receivedOffer?.offer_message}
+                  </div>
+                </div>
+              </section>
+            )}
             {isMine && (
               <section className={cx("section_offer")}>
                 <div className={cx("header")}>내가 보낸 제안</div>
