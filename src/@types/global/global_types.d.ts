@@ -1,5 +1,13 @@
 declare module "@types" {
   export namespace api_types {
+    interface Alarm {
+      id: string;
+      is_checked: boolean;
+      createdAt: string;
+      send_user: UserProfile;
+      job_post: JobPost;
+    }
+
     interface Magazine {
       id: string;
       url: string;
