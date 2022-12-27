@@ -14,5 +14,8 @@ const queryKey = {
     offer_received_user_id?: string,
     job_post_id?: string
   ) => ["jobOffer", offer_send_user_id, offer_received_user_id, job_post_id],
+  getMagazineList: ["magazineList"],
+  getNotionPage: (id: string) => ["notionPage", id],
+  getNotionPageInfo: (id: string) => ["notionPageInfo", id],
 };
 export default queryKey;
