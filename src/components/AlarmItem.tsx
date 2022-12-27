@@ -49,7 +49,9 @@ export default function AlarmItem(props: Props) {
     : cx("container");
 
   const onClickAlarm = () => {
-    readAlarm(props.id);
+    if (!props.is_checked) {
+      readAlarm(props.id);
+    }
     nav(`/jobpost/${props.job_post.id}`);
   };
 
