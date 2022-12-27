@@ -19,6 +19,7 @@ import JobListPage from "@pages/JobListPage";
 import DeveloperListPage from "@pages/DeveloperListPage";
 import DirectOfferPage from "@pages/DirectOfferPage";
 import ContactPage from "@pages/ContactPage";
+import MagazineDetailPage from "@pages/MagazineDetailPage";
 
 function App() {
   return (
@@ -60,6 +61,7 @@ function App() {
           <Route path="/developers" element={<DeveloperListPage />} />
           <Route path="/direct-offer/:id" element={<DirectOfferPage />} />
           <Route path="/contact/:id" element={<ContactPage />} />
+          <Route path="/magazine/:id" element={<MagazineDetailPage />} />
         </Routes>
       </BrowserRouter>
     </div>
