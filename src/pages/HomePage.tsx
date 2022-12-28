@@ -162,7 +162,7 @@ function BusinessHome({ user }: { user: common_types.AuthUser["user"] }) {
               <DeveloperItem
                 key={developer.id}
                 {...developer}
-                name={developer.username}
+                name={developer.name}
                 bio={developer.user_detail_individual?.bio as string}
               />
             ))

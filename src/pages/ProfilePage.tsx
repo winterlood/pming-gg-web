@@ -83,7 +83,7 @@ function ProfilePage() {
   return (
     <Layout
       header={{
-        pageName: isMe ? "내 프로필" : `${profileQueryData?.username}의 프로필`,
+        pageName: isMe ? "내 프로필" : `${profileQueryData?.name}의 프로필`,
         leftButton: !isMe && (
           <IconButton type={"light"} icon={"goback"} onClick={() => nav(-1)} />
         ),
@@ -111,7 +111,7 @@ function ProfilePage() {
               <div className={cx("profile-image-box")}>
                 <img src={profileData.avatar_url} />
               </div>
-              <div className={cx("username-box")}>{profileData.username}</div>
+              <div className={cx("name-box")}>{profileData.name}</div>
               <div className={cx("user-info-list")}>
                 {userType === "individual" && (
                   <>

@@ -120,7 +120,7 @@ function DirectOfferPage() {
               <img alt="developer avatar" src={developerProfile?.avatar_url} />
             </div>
             <div className={cx("info_row")}>
-              <div className={cx("name")}>{developerProfile?.username}</div>
+              <div className={cx("name")}>{developerProfile?.name}</div>
               <div className={cx("bio")}>
                 {developerProfile?.user_detail_individual?.bio}
               </div>

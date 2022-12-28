@@ -23,7 +23,7 @@ function RegisterPage() {
 
   const { handleSubmit, control } = useForm();
   const onSubmit = (data: any) => {
-    const { email, password, username } = data;
+    const { email, password } = data;
 
     if (!email.match(regexPattern.email)) {
       alert("이메일 형식에 맞게 입력해주세요");
@@ -35,10 +35,7 @@ function RegisterPage() {
       return;
     }
 
-    if (username.length < 3) {
-      alert("닉네임은 3자 이상이어야 합니다");
-      return;
-    }
+    const username = String(new Date().getTime());
 
     mutate(
       { email, password, username },
@@ -110,22 +107,22 @@ function RegisterPage() {
                   )}
                 />
               </LabeledInputContainer>
-              <LabeledInputContainer label={"닉네임(기업이라면 기업명)"}>
+              {/* <LabeledInputContainer label={"이름(기업이라면 기업명)"}>
                 <Controller
                   defaultValue=""
-                  name="username"
+                  name="name"
                   control={control}
                   rules={{}}
                   render={(props: any) => (
                     <BaseInput
-                      placeholder="닉네임(기업이라면 기업명)"
+                      placeholder="이름(기업이라면 기업명)"
                       type="text"
                       value={props.field.value}
                       onChange={props.field.onChange}
                     />
                   )}
                 />
-              </LabeledInputContainer>
+              </LabeledInputContainer> */}
 
               <div className={cx("hidden")}>
                 <input ref={submitRef} type={"submit"} />

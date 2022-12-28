@@ -49,7 +49,7 @@ export default function AlarmItem(props: Props) {
         <div className={cx("info_row")}>
           {user.user_type === "business" && (
             <>
-              <span className={cx("link")}>{props.send_user.username}</span>
+              <span className={cx("link")}>{props.send_user.name}</span>
               님이&nbsp;
               <span className={cx("link")}>{props.job_post.duty}</span>
               에&nbsp; 지원했어요
@@ -57,7 +57,7 @@ export default function AlarmItem(props: Props) {
           )}
           {user.user_type === "individual" && (
             <>
-              <span className={cx("link")}>{props.send_user.username}</span>
+              <span className={cx("link")}>{props.send_user.name}</span>
               이&nbsp;
               <span className={cx("link")}>{props.job_post.duty}</span>를&nbsp;
               제안했어요

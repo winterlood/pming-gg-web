@@ -35,7 +35,7 @@ function DeveloperListPage() {
           <DeveloperItem
             id={it.id}
             avatar_url={it.avatar_url}
-            name={it.username}
+            name={it.name}
             bio={it.user_detail_individual?.bio as string}
           />
         ))}

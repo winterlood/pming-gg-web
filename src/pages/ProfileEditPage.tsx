@@ -30,6 +30,7 @@ import EditIcon from "@mui/icons-material/Edit";
 import useUpdateProfileMutation from "@hooks/useUpdateProfileMutation";
 import useCreateProfileMutation from "@hooks/useCreateProfileMutation";
 import useUploadFileMutation from "@hooks/useUploadFileMutation";
+import useAuthUser from "@hooks/useAuthUser";
 const cx = classNames.bind(style);
 
 function TypeSceletScene({
@@ -87,15 +88,15 @@ function IndividualUserScene({
   return (
     <div className={cx("scene-individual")}>
       <AvatarSelectScene form={form} />
-      <LabeledInputContainer label="닉네임">
+      <LabeledInputContainer label="이름">
         <Controller
           defaultValue=""
-          name="username"
+          name="name"
           control={form.control}
           rules={{ required: true }}
           render={(props: any) => (
             <BaseInput
-              placeholder="닉네임"
+              placeholder="이름"
               type="text"
               value={props.field.value}
               onChange={props.field.onChange}
@@ -182,7 +183,7 @@ function BusinessUserScene({
       <LabeledInputContainer label="기업이름">
         <Controller
           defaultValue=""
-          name="username"
+          name="name"
           control={form.control}
           rules={{ required: true }}
           render={(props: any) => (
@@ -334,7 +335,7 @@ function ProfileEditPage() {
 
   const dispatch = useAppDispatch();
 
-  const auth = useSelector((v: RootState) => v.auth);
+  const auth = useAuthUser();
   const [mode, setMode] = useState<"create" | "edit">("edit");
   const [step, setStep] = useState(1);
   const [type, setType] = useState<common_types.UserType>("individual");
@@ -359,10 +360,9 @@ function ProfileEditPage() {
       setType(userType);
 
       form.setValue("avatar_url", data.avatar_url);
-      form.setValue("username", data.username);
+      form.setValue("name", data.name);
       let detailDataObject =
         data.user_detail_business ?? (data.user_detail_individual as Object);
-      console.log(detailDataObject);
       Object.keys(detailDataObject).forEach((key) => {
         //@ts-ignore
         const value = detailDataObject[key];
@@ -432,6 +432,8 @@ function ProfileEditPage() {
       type,
       ...form.getValues(),
     };
+
+    console.log(mutateParam);
 
     if (mode === "create") {
       createProfileMutation.mutate(mutateParam, {

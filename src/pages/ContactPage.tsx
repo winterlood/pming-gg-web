@@ -59,7 +59,7 @@ function ContactPage() {
             <img alt="developer avatar" src={profileData?.avatar_url} />
           </div>
           <div className={cx("info_row")}>
-            <div className={cx("name")}>{profileData?.username}</div>
+            <div className={cx("name")}>{profileData?.name}</div>
             <div className={cx("bio")}>
               {profileData?.user_detail_individual?.bio}
             </div>

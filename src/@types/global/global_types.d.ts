@@ -53,6 +53,7 @@ declare module "@types" {
       id: string;
       email: string;
       username: string;
+      name: string;
       avatar_url: string;
       is_profile_created: boolean;
       user_detail_individual: {
@@ -168,6 +169,8 @@ declare module "@types" {
         updatedAt: string;
         is_profile_created: boolean;
         user_type: "individual" | "business";
+        username: string;
+        name: string;
       };
     }
   }

@@ -36,7 +36,7 @@ function JobPostItem(props: Props) {
       </div>
       <div className={cx("info-col")}>
         <div className={cx("duty")}>{props.duty}</div>
-        <div className={cx("company")}>{props.author.username}</div>
+        <div className={cx("company")}>{props.author.name}</div>
         <div className={cx("work-type")}>
           {props["work_type"] === "full-time" ? "풀타임" : "파트타임"}
         </div>

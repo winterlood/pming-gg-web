@@ -221,7 +221,7 @@ function JobPostDetail() {
                           onClick={() => {}}
                           id={it.offer_received_user.id}
                           avatar_url={it.offer_received_user.avatar_url}
-                          name={it.offer_received_user.username}
+                          name={it.offer_received_user.name}
                           bio={
                             it.offer_received_user.user_detail_individual
                               ?.bio as string
@@ -250,7 +250,7 @@ function JobPostDetail() {
                           isContactAble
                           id={it.apply_user.id}
                           avatar_url={it.apply_user.avatar_url}
-                          name={it.apply_user.username}
+                          name={it.apply_user.name}
                           bio={
                             it.apply_user.user_detail_individual?.bio as string
                           }
