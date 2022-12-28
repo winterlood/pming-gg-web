@@ -4,11 +4,11 @@ import useGetProfileQuery from "@hooks/useGetProfileQuery";
 import Layout from "@layout/Layout";
 import { RootState } from "@store/createStore";
 import { useSelector } from "react-redux";
-import { useNavigate, useParams } from "react-router-dom";
+import { Link, useNavigate, useParams } from "react-router-dom";
 
 import style from "./DirectOfferPage.module.scss";
 import classNames from "classnames/bind";
-import { InputBase } from "@mui/material";
+import { Alert, InputBase } from "@mui/material";
 import { LabeledInputContainer, MultilineInput } from "@components/Input";
 import { Controller, useForm } from "react-hook-form";
 import JobPostItem from "@components/JobPostItem";
@@ -160,16 +160,26 @@ function DirectOfferPage() {
           <section className={cx("section_mypost")}>
             <div className={cx("label")}>제안할 구직 공고를 선택하세요</div>
             <div className={cx("post_list")}>
-              {offerAvailableJobPost?.map((it) => (
-                <JobPostItem
-                  key={it.id}
-                  isHighlight={recoPost === it.id}
-                  {...it}
-                  onClick={() => {
-                    setRecoPost(it.id);
-                  }}
-                />
-              ))}
+              {offerAvailableJobPost && offerAvailableJobPost.length > 0 ? (
+                offerAvailableJobPost.map((it) => (
+                  <JobPostItem
+                    key={it.id}
+                    isHighlight={recoPost === it.id}
+                    {...it}
+                    onClick={() => {
+                      setRecoPost(it.id);
+                    }}
+                  />
+                ))
+              ) : (
+                <Alert severity={"error"}>
+                  아직 제안할 공고가 없습니다
+                  <br />
+                  채용 제안을 위해 최소 1개 이상의 등록한 공고가 필요합니다
+                  <br />
+                  <Link to={`/jobpost/new`}>새로운 공고 등록하기</Link>
+                </Alert>
+              )}
             </div>
           </section>
           <section className={cx("section_submit")}>
