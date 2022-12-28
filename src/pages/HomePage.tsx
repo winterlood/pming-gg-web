@@ -3,7 +3,7 @@ import MagazineCraousel from "@components/MagazineCarousel";
 import withOnlyProfiledUser from "@hoc/withOnlyProfiledUser";
 import useAuthUser from "@hooks/useAuthUser";
 import Layout from "@layout/Layout";
-import { ReactElement } from "react";
+import { ReactElement, useEffect } from "react";
 
 import classNames from "classnames/bind";
 import style from "./HomePage.module.scss";
@@ -16,6 +16,8 @@ import { useNavigate } from "react-router-dom";
 import useGetProfileQuery from "@hooks/useGetProfileQuery";
 import GitHubLanaguageChart from "@components/GitHubLanaguageChart";
 import useGetRecommendedJobPost from "@hooks/useGetRecommendedJobPost";
+import { useAppDispatch } from "@store/createStore";
+import { logout } from "@store/slice/authSlice";
 const cx = classNames.bind(style);
 
 function HomeSection(props: {
@@ -152,7 +154,6 @@ function BusinessHome({ user }: { user: common_types.AuthUser["user"] }) {
 function HomePage() {
   const nav = useNavigate();
   const { user } = useAuthUser();
-  if (!user) return null;
   return (
     <Layout
       header={{

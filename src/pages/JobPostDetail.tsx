@@ -6,8 +6,6 @@ import IconButton from "@components/IconButton";
 import useGetJobPostDetailQuery from "@hooks/useGetJobPostDetailQuery";
 import JobPostItem from "@components/JobPostItem";
 import TaskAltIcon from "@mui/icons-material/TaskAlt";
-import { useSelector } from "react-redux";
-import { RootState } from "@store/createStore";
 import { useEffect, useMemo, useState } from "react";
 import Button from "@components/Button";
 import useDeleteJobPostMutation from "@hooks/useDeleteJobPostMutation";
@@ -21,6 +19,7 @@ const cx = classNames.bind(style);
 
 function JobPostDetail() {
   const { user } = useAuthUser();
+
   const nav = useNavigate();
 
   const { id: JobPostID } = useParams();

@@ -1,24 +1,20 @@
 import { RootState } from "@store/createStore";
-import React, { useEffect } from "react";
+import React from "react";
 import { useSelector } from "react-redux";
-import { useNavigate } from "react-router-dom";
+import { Navigate } from "react-router-dom";
 
 function withOnlyProfiledUser<P extends object>(
   WrappedComponent: React.ComponentType<P>
 ) {
   const ProtectedComponent = ({ ...props }) => {
-    const nav = useNavigate();
     const auth = useSelector((v: RootState) => v.auth);
-
-    useEffect(() => {
-      if (!auth) {
-        nav("/login", { replace: true });
-      } else if (!auth.user.is_profile_created) {
-        nav("/profile/create", { replace: true });
-      }
-    }, [auth]);
-
-    return <WrappedComponent {...(props as P)} />;
+    if (!auth) {
+      return <Navigate replace to="/login" />;
+    } else if (!auth.user.is_profile_created) {
+      return <Navigate replace to="/profile/create" />;
+    } else {
+      return <WrappedComponent {...(props as P)} />;
+    }
   };
   return ProtectedComponent;
 }

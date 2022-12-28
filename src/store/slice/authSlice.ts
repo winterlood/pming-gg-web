@@ -4,6 +4,7 @@ import { common_types } from "@types";
 function getAuth() {
   try {
     const auth = JSON.parse(localStorage.getItem("auth") as string);
+    if (!auth) return null;
     return auth;
   } catch (err) {
     return null;
