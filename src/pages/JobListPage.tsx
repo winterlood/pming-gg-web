@@ -9,6 +9,7 @@ import { useNavigate } from "react-router-dom";
 import { useState } from "react";
 import { BaseInput } from "@components/Input";
 import useDebounce from "@hooks/useDebounce";
+import { Alert } from "@mui/material";
 const cx = classNames.bind(style);
 
 function JobListPage() {
@@ -48,11 +49,17 @@ function JobListPage() {
             onChange={(e) => setSearch(e.target.value)}
           />
         </section> */}
-        <section className={cx("section-list")}>
-          {jobPostList?.map((jobPost) => (
-            <JobPostItem key={jobPost.id} {...jobPost} />
-          ))}
-        </section>
+        {jobPostList && (
+          <section className={cx("section-list")}>
+            {jobPostList?.length > 0 ? (
+              jobPostList?.map((jobPost) => (
+                <JobPostItem key={jobPost.id} {...jobPost} />
+              ))
+            ) : (
+              <Alert severity={"info"}>아직 등록된 공고가 없습니다</Alert>
+            )}
+          </section>
+        )}
       </main>
     </Layout>
   );
