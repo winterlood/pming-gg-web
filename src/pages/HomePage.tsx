@@ -18,6 +18,7 @@ import GitHubLanaguageChart from "@components/GitHubLanaguageChart";
 import useGetRecommendedJobPost from "@hooks/useGetRecommendedJobPost";
 import { useAppDispatch } from "@store/createStore";
 import { logout } from "@store/slice/authSlice";
+import { Alert } from "@mui/material";
 const cx = classNames.bind(style);
 
 function HomeSection(props: {
@@ -72,12 +73,21 @@ function IndividualHome({ user }: { user: common_types.AuthUser["user"] }) {
           onClick: () => nav(`/profile/${id}`),
         }}
       >
-        {profileQueryData && (
+        {profileQueryData && profileQueryData.github_user ? (
           <div>
             <GitHubLanaguageChart
               type="pie"
               languageData={profileQueryData.github_user.totalLangList}
             />
+          </div>
+        ) : (
+          <div>
+            <Alert severity="info">
+              깃허브 연동이 필요합니다. <br />
+              <b>더보기</b>를 눌러 프로필 페이지로 이동해
+              <br />
+              깃허브 데이터를 연동하세요
+            </Alert>
           </div>
         )}
       </HomeSection>
@@ -89,10 +99,15 @@ function IndividualHome({ user }: { user: common_types.AuthUser["user"] }) {
           onClick: () => nav(`/jobs`),
         }}
       >
-        {jobPostList &&
+        {jobPostList && jobPostList.length > 0 ? (
           jobPostList
             .slice(0, 2)
-            .map((jobPost) => <JobPostItem key={jobPost.id} {...jobPost} />)}
+            .map((jobPost) => <JobPostItem key={jobPost.id} {...jobPost} />)
+        ) : (
+          <div>
+            <Alert severity="info">등록된 공고가 없습니다</Alert>
+          </div>
+        )}
       </HomeSection>
     </>
   );
@@ -122,10 +137,13 @@ function BusinessHome({ user }: { user: common_types.AuthUser["user"] }) {
           onClick: () => nav(`/profile/${id}`),
         }}
       >
-        {jobPostQueryData &&
+        {jobPostQueryData && jobPostQueryData.length > 0 ? (
           jobPostQueryData
             ?.slice(0, 2)
-            .map((jobPost) => <JobPostItem key={jobPost.id} {...jobPost} />)}
+            .map((jobPost) => <JobPostItem key={jobPost.id} {...jobPost} />)
+        ) : (
+          <div>등록한 공고가 없습니다</div>
+        )}
       </HomeSection>
       <HomeSection
         title="인재 추천"
