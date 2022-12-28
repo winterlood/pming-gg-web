@@ -30,6 +30,11 @@ function RegisterPage() {
       return;
     }
 
+    if (!password.match(/(?=.*\d)(?=.*[a-z]).{8,}/)) {
+      alert("비밀번호는 영어소문자, 숫자를 포함해 최소 8자로 만들어야 합니다");
+      return;
+    }
+
     mutate(
       { email, password, username },
       {
@@ -38,10 +43,6 @@ function RegisterPage() {
             "이메일로 인증 링크가 발송되었습니다. 인증 이후 로그인 가능합니다."
           );
           nav("/login", { replace: true });
-        },
-        onError: (err) => {
-          // @ts-ignore
-          alert("이메일이나 닉네임이 이미 존재합니다");
         },
       }
     );
@@ -109,7 +110,7 @@ function RegisterPage() {
                   defaultValue=""
                   name="username"
                   control={control}
-                  rules={{ required: true }}
+                  rules={{ required: true, minLength: 3 }}
                   render={(props: any) => (
                     <BaseInput
                       placeholder="닉네임(기업이라면 기업명)"
