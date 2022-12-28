@@ -19,24 +19,8 @@ import useGetApplyQuery from "@hooks/useGetApplyQuery";
 import useGetJobPostByUserIdQuery from "@hooks/useGetJobPostByUserIdQuery";
 import Button from "@components/Button";
 import { logout } from "@store/slice/authSlice";
+import { githubOAuthLink } from "@utils/github";
 const cx = classNames.bind(style);
-
-const scope = [
-  "user",
-  "public_repo",
-  "repo",
-  "repo_deployment",
-  "repo:status",
-  "read:repo_hook",
-  "read:org",
-  "read:public_key",
-  "read:gpg_key",
-  "read:packages",
-  "write:org",
-].join(" ");
-const githubHref = `
-  https://github.com/login/oauth/authorize?client_id=40f478959240a18c7c53&redirect_uri=http://localhost:3000/githubconnect&scope=${scope}
-  `;
 
 function ProfilePage() {
   const nav = useNavigate();
@@ -228,7 +212,7 @@ function ProfilePage() {
                   <div
                     className={cx("header-button")}
                     onClick={() => {
-                      window.location.href = githubHref;
+                      window.location.href = githubOAuthLink;
                     }}
                   >
                     갱신

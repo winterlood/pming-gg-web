@@ -12,13 +12,12 @@ import useGetJobPostByUserIdQuery from "@hooks/useGetJobPostByUserIdQuery";
 import JobPostItem from "@components/JobPostItem";
 import useGetRecommendDevlopers from "@hooks/useGetRecommendDevlopers";
 import DeveloperItem from "@components/DeveloperItem";
-import { useNavigate } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import useGetProfileQuery from "@hooks/useGetProfileQuery";
 import GitHubLanaguageChart from "@components/GitHubLanaguageChart";
 import useGetRecommendedJobPost from "@hooks/useGetRecommendedJobPost";
-import { useAppDispatch } from "@store/createStore";
-import { logout } from "@store/slice/authSlice";
 import { Alert } from "@mui/material";
+import { githubOAuthLink } from "@utils/github";
 const cx = classNames.bind(style);
 
 function HomeSection(props: {
@@ -84,9 +83,7 @@ function IndividualHome({ user }: { user: common_types.AuthUser["user"] }) {
           <div>
             <Alert severity="info">
               깃허브 연동이 필요합니다. <br />
-              <b>더보기</b>를 눌러 프로필 페이지로 이동해
-              <br />
-              깃허브 데이터를 연동하세요
+              <a href={githubOAuthLink}>깃허브 데이터 연동하기</a>
             </Alert>
           </div>
         )}
@@ -142,7 +139,12 @@ function BusinessHome({ user }: { user: common_types.AuthUser["user"] }) {
             ?.slice(0, 2)
             .map((jobPost) => <JobPostItem key={jobPost.id} {...jobPost} />)
         ) : (
-          <div>등록한 공고가 없습니다</div>
+          <div>
+            <Alert severity="info">
+              등록한 공고가 없습니다 <br />
+              <Link to={`/jobpost/new`}>새로운 공고 만들기</Link>
+            </Alert>
+          </div>
         )}
       </HomeSection>
       <HomeSection
@@ -153,7 +155,7 @@ function BusinessHome({ user }: { user: common_types.AuthUser["user"] }) {
           onClick: () => nav(`/developers`),
         }}
       >
-        {developerList &&
+        {developerList && developerList.length > 0 ? (
           developerList
             ?.slice(0, 2)
             .map((developer) => (
@@ -163,7 +165,12 @@ function BusinessHome({ user }: { user: common_types.AuthUser["user"] }) {
                 name={developer.username}
                 bio={developer.user_detail_individual?.bio as string}
               />
-            ))}
+            ))
+        ) : (
+          <div>
+            <Alert severity="info">등록된 인재가 없습니다</Alert>
+          </div>
+        )}
       </HomeSection>
     </>
   );

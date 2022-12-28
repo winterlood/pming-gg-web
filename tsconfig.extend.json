@@ -11,7 +11,8 @@
       "@api/*": ["./api/*"],
       "@store/*": ["./store/*"],
       "@layout/*": ["./layout/*"],
-      "@types/*": ["./@types/*"]
+      "@types/*": ["./@types/*"],
+      "@utils/*": ["./utils/*"]
     }
   }
 }
