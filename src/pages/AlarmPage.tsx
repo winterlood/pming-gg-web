@@ -1,6 +1,7 @@
 import AlarmItem from "@components/AlarmItem";
 import useGetAlarmQuery from "@hooks/useGetAlarmQuery";
 import Layout from "@layout/Layout";
+import { Alert } from "@mui/material";
 import classNames from "classnames/bind";
 import style from "./AlarmPage.module.scss";
 
@@ -18,7 +19,11 @@ function AlarmPage() {
     >
       <div className={cx("container")}>
         <div className={cx("body")}>
-          {data && data.map((it) => <AlarmItem key={it.id} {...it} />)}
+          {data && data.length > 0 ? (
+            data.map((it) => <AlarmItem key={it.id} {...it} />)
+          ) : (
+            <Alert severity={"info"}>아직 알림이 없습니다</Alert>
+          )}
         </div>
       </div>
     </Layout>
