@@ -25,12 +25,16 @@ const authSlice = createSlice({
       localStorage.removeItem("auth");
       return null;
     },
-    toggleIsProfileCreated: (state) => {
+    toggleIsProfileCreated: (
+      state,
+      action: PayloadAction<{ user_type: common_types.UserType }>
+    ) => {
       const newState = {
         ...state,
         user: {
           ...state?.user,
           is_profile_created: true,
+          user_type: action.payload.user_type,
         },
       } as common_types.AuthUser;
       localStorage.setItem("auth", JSON.stringify(newState));
