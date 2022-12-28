@@ -4,7 +4,7 @@ import Layout from "@layout/Layout";
 import { RootState, useAppDispatch } from "@store/createStore";
 import { useEffect, useMemo, useState } from "react";
 import { useSelector } from "react-redux";
-import { useNavigate, useParams } from "react-router-dom";
+import { Link, useNavigate, useParams } from "react-router-dom";
 import useGetProfileQuery from "@hooks/useGetProfileQuery";
 
 import style from "./ProfilePage.module.scss";
@@ -20,6 +20,7 @@ import useGetJobPostByUserIdQuery from "@hooks/useGetJobPostByUserIdQuery";
 import Button from "@components/Button";
 import { logout } from "@store/slice/authSlice";
 import { githubOAuthLink } from "@utils/github";
+import { Alert } from "@mui/material";
 const cx = classNames.bind(style);
 
 function ProfilePage() {
@@ -174,11 +175,22 @@ function ProfilePage() {
                     </div>
                   )}
                 </div>
+
                 {jobPostQueryData && (
                   <div className={cx("jobpost-list")}>
-                    {jobPostQueryData.map((jobPost) => (
-                      <JobPostItem key={jobPost.id} {...jobPost} />
-                    ))}
+                    {jobPostQueryData.length > 0 ? (
+                      <div className={cx("jobpost-list")}>
+                        {jobPostQueryData.map((jobPost) => (
+                          <JobPostItem key={jobPost.id} {...jobPost} />
+                        ))}
+                      </div>
+                    ) : (
+                      <div>
+                        <Alert severity={"info"}>
+                          아직 등록한 공고가 없습니다
+                        </Alert>
+                      </div>
+                    )}
                   </div>
                 )}
               </section>
@@ -198,7 +210,11 @@ function ProfilePage() {
                         />
                       ))
                     ) : (
-                      <div>아직 지원한 공고가 없습니다</div>
+                      <Alert severity={"info"}>
+                        아직 지원한 공고가 없습니다
+                        <br />
+                        <Link to={`/jobs`}>추천 채용 공고 보러가기</Link>
+                      </Alert>
                     )}
                   </div>
                 )}
@@ -266,7 +282,9 @@ function ProfilePage() {
                     </div>
                   </>
                 ) : (
-                  <div>아직 데이터가 없습니다</div>
+                  <Alert severity={"info"}>
+                    깃허브 데이터 연동이 필요합니다
+                  </Alert>
                 )}
               </div>
             </section>
