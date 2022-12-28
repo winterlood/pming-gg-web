@@ -13,6 +13,7 @@ import {
 } from "@components/Input";
 import Button from "@components/Button";
 import { useRef } from "react";
+import { regexPattern } from "@utils/regex";
 const cx = classNames.bind(style);
 
 function RegisterPage() {
@@ -21,17 +22,21 @@ function RegisterPage() {
   const submitRef = useRef(null);
 
   const { handleSubmit, control } = useForm();
-
   const onSubmit = (data: any) => {
     const { email, password, username } = data;
 
-    if (username.length < 3) {
-      alert("닉네임은 3자 이상이어야 합니다");
+    if (!email.match(regexPattern.email)) {
+      alert("이메일 형식에 맞게 입력해주세요");
       return;
     }
 
-    if (!password.match(/(?=.*\d)(?=.*[a-z]).{8,}/)) {
+    if (!password.match(regexPattern.password)) {
       alert("비밀번호는 영어소문자, 숫자를 포함해 최소 8자로 만들어야 합니다");
+      return;
+    }
+
+    if (username.length < 3) {
+      alert("닉네임은 3자 이상이어야 합니다");
       return;
     }
 
@@ -110,7 +115,7 @@ function RegisterPage() {
                   defaultValue=""
                   name="username"
                   control={control}
-                  rules={{ required: true, minLength: 3 }}
+                  rules={{}}
                   render={(props: any) => (
                     <BaseInput
                       placeholder="닉네임(기업이라면 기업명)"
