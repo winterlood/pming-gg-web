@@ -30,10 +30,8 @@ function LoginPage() {
   const onSubmit = (data: any) => {
     mutate(data, {
       onSuccess: (data) => {
+        console.log(data);
         dispatch(login(data.data as common_types.AuthUser));
-      },
-      onError: (err) => {
-        alert("아이디나 비밀번호를 다시 확인하세요");
       },
     });
   };
