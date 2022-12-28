@@ -15,6 +15,7 @@ import DeveloperItem from "@components/DeveloperItem";
 import useGetOfferQuery from "@hooks/useGetOfferQuery";
 import useDeleteApplyMutation from "@hooks/useDeleteApplyMutation";
 import useAuthUser from "@hooks/useAuthUser";
+import withOnlyProfiledUser from "@hoc/withOnlyProfiledUser";
 const cx = classNames.bind(style);
 
 function JobPostDetail() {
@@ -283,4 +284,4 @@ function JobPostDetail() {
     </Layout>
   );
 }
-export default JobPostDetail;
+export default withOnlyProfiledUser(JobPostDetail);

@@ -99,6 +99,9 @@ function ProfilePage() {
     <Layout
       header={{
         pageName: isMe ? "내 프로필" : `${profileQueryData?.username}의 프로필`,
+        leftButton: !isMe && (
+          <IconButton type={"light"} icon={"goback"} onClick={() => nav(-1)} />
+        ),
         rightButton: isMe && (
           <IconButton
             type={"light"}
