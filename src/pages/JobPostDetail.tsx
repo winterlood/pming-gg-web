@@ -37,7 +37,11 @@ function JobPostDetail() {
 
   const [isMine, setIsMine] = useState(false);
 
-  const { data: applyData, isLoading: applyDataLoading } = useGetApplyQuery(
+  const {
+    data: applyData,
+    isLoading: applyDataLoading,
+    refetch: refetchApplyData,
+  } = useGetApplyQuery(
     {
       job_post_id: JobPostID,
     },
@@ -80,6 +84,7 @@ function JobPostDetail() {
         {
           onSuccess: () => {
             alert("지원되었습니다");
+            refetchApplyData();
           },
           onError: (err) => {
             alert(err);
@@ -94,7 +99,7 @@ function JobPostDetail() {
       deleteApplyMutation.mutate(myApplyID, {
         onSuccess: () => {
           alert("지원이 취소되었습니다");
-          nav(`/profile/${user?.id}`);
+          refetchApplyData();
         },
         onError: () => {
           alert("오류가 발생했습니다. 잠시 후 다시 시도해보세요");
