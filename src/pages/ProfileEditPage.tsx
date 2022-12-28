@@ -386,6 +386,7 @@ function ProfileEditPage() {
         },
       });
     } else {
+      form.setValue("avatar_url", undefined);
       if (submitRef.current) {
         // @ts-ignore
         submitRef.current.click();
@@ -401,8 +402,8 @@ function ProfileEditPage() {
 
     if (mode === "create") {
       createProfileMutation.mutate(mutateParam, {
-        onSuccess: () => {
-          dispatch(toggleIsProfileCreated());
+        onSuccess: (data) => {
+          dispatch(toggleIsProfileCreated({ user_type: type }));
           nav("/profile", { replace: true });
         },
         onError: (err) => {

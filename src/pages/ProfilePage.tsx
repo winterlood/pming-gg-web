@@ -204,74 +204,89 @@ function ProfilePage() {
                 <div className={cx("section-header")}>
                   <div className={cx("header-text")}>내가 지원한 공고</div>
                 </div>
-                <div className={cx("apply-list")}>
-                  {applyQueryData &&
-                    applyQueryData.map((apply) => (
-                      <JobPostItem
-                        key={`myapply-${apply.id}`}
-                        {...apply.job_post}
-                      />
-                    ))}
-                </div>
+                {applyQueryData && (
+                  <div className={cx("apply-list")}>
+                    {applyQueryData.length > 0 ? (
+                      applyQueryData.map((apply) => (
+                        <JobPostItem
+                          key={`myapply-${apply.id}`}
+                          {...apply.job_post}
+                        />
+                      ))
+                    ) : (
+                      <div>아직 지원한 공고가 없습니다</div>
+                    )}
+                  </div>
+                )}
               </section>
             ) : null}
-            {profileData.github_user && (
-              <section className={cx("section-github")}>
-                <div className={cx("section-header")}>
-                  <div className={cx("header-text")}>깃허브 데이터</div>
-                  {isMe && (
-                    <div
-                      className={cx("header-button")}
-                      onClick={() => {
-                        window.location.href = githubHref;
-                      }}
-                    >
-                      갱신
+
+            <section className={cx("section-github")}>
+              <div className={cx("section-header")}>
+                <div className={cx("header-text")}>깃허브 데이터</div>
+                {isMe && (
+                  <div
+                    className={cx("header-button")}
+                    onClick={() => {
+                      window.location.href = githubHref;
+                    }}
+                  >
+                    갱신
+                  </div>
+                )}
+              </div>
+              <div className={cx("github-data-list")}>
+                {profileData.github_user ? (
+                  <>
+                    <div className={cx("github-item-box")}>
+                      <div className={cx("header")}>종합</div>
+                      <GithubGeneralStatChart
+                        totalRepoCount={
+                          profileData.github_user.totalCommitCount
+                        }
+                        totalCommitCount={
+                          profileData.github_user.totalCommitCount
+                        }
+                        totalIssueCount={
+                          profileData.github_user.totalIssueCount
+                        }
+                        totalPRCount={profileData.github_user.totalPRCount}
+                        totalReviewCount={
+                          profileData.github_user.totalReviewCount
+                        }
+                      />
                     </div>
-                  )}
-                </div>
-                <div className={cx("github-data-list")}>
-                  <div className={cx("github-item-box")}>
-                    <div className={cx("header")}>종합</div>
-                    <GithubGeneralStatChart
-                      totalRepoCount={profileData.github_user.totalCommitCount}
-                      totalCommitCount={
-                        profileData.github_user.totalCommitCount
-                      }
-                      totalIssueCount={profileData.github_user.totalIssueCount}
-                      totalPRCount={profileData.github_user.totalPRCount}
-                      totalReviewCount={
-                        profileData.github_user.totalReviewCount
-                      }
-                    />
-                  </div>
-                  <div className={cx("github-item-box")}>
-                    <div className={cx("header")}>언어</div>
-                    <GitHubLanaguageChart
-                      type="pie"
-                      languageData={profileData.github_user.totalLangList}
-                    />
-                  </div>
-                  <div className={cx("github-item-box")}>
-                    <div className={cx("header")}>프로젝트</div>
-                    <div className={cx("github-repo-list")}>
-                      {profileData.github_user.repoList.map((repo) => (
-                        <RepoItem
-                          key={repo.id}
-                          repo={repo}
-                          onClick={() => {
-                            window.open(
-                              `https://github.com/${repo.owner.login}/${repo.name}`,
-                              "_blank"
-                            );
-                          }}
-                        />
-                      ))}
+                    <div className={cx("github-item-box")}>
+                      <div className={cx("header")}>언어</div>
+                      <GitHubLanaguageChart
+                        type="pie"
+                        languageData={profileData.github_user.totalLangList}
+                      />
                     </div>
-                  </div>
-                </div>
-              </section>
-            )}
+                    <div className={cx("github-item-box")}>
+                      <div className={cx("header")}>프로젝트</div>
+                      <div className={cx("github-repo-list")}>
+                        {profileData.github_user.repoList.map((repo) => (
+                          <RepoItem
+                            key={repo.id}
+                            repo={repo}
+                            onClick={() => {
+                              window.open(
+                                `https://github.com/${repo.owner.login}/${repo.name}`,
+                                "_blank"
+                              );
+                            }}
+                          />
+                        ))}
+                      </div>
+                    </div>
+                  </>
+                ) : (
+                  <div>아직 데이터가 없습니다</div>
+                )}
+              </div>
+            </section>
+
             {isMe && (
               <section>
                 <Button
