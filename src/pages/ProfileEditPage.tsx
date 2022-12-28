@@ -87,6 +87,22 @@ function IndividualUserScene({
   return (
     <div className={cx("scene-individual")}>
       <AvatarSelectScene form={form} />
+      <LabeledInputContainer label="닉네임">
+        <Controller
+          defaultValue=""
+          name="username"
+          control={form.control}
+          rules={{ required: true }}
+          render={(props: any) => (
+            <BaseInput
+              placeholder="닉네임"
+              type="text"
+              value={props.field.value}
+              onChange={props.field.onChange}
+            />
+          )}
+        />
+      </LabeledInputContainer>
       <LabeledInputContainer label="생일">
         <Controller
           defaultValue=""
@@ -163,6 +179,22 @@ function BusinessUserScene({
   return (
     <div className={cx("scene-business")}>
       <AvatarSelectScene form={form} />
+      <LabeledInputContainer label="기업이름">
+        <Controller
+          defaultValue=""
+          name="username"
+          control={form.control}
+          rules={{ required: true }}
+          render={(props: any) => (
+            <BaseInput
+              placeholder="기업이름"
+              type="text"
+              value={props.field.value}
+              onChange={props.field.onChange}
+            />
+          )}
+        />
+      </LabeledInputContainer>
       <LabeledInputContainer label="홈페이지 주소">
         <Controller
           defaultValue=""
@@ -327,6 +359,7 @@ function ProfileEditPage() {
       setType(userType);
 
       form.setValue("avatar_url", data.avatar_url);
+      form.setValue("username", data.username);
       let detailDataObject =
         data.user_detail_business ?? (data.user_detail_individual as Object);
       console.log(detailDataObject);
