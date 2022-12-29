@@ -28,13 +28,11 @@ function BottomNavi(props: any) {
   const { data: newAlarmCount } = useGetNewAlarmCountQuery({
     refetchOnMount: true,
   });
-  console.log(newAlarmCount);
 
   useEffect(() => {
     if (loc.pathname) {
       const pathName = loc.pathname;
       const firstDepth = pathName.split("/")[1].replace("/", "");
-      console.log(pathName);
       setValue(firstDepth);
     }
   }, [loc.pathname]);

@@ -102,14 +102,14 @@ function LoginPage() {
           >
             로그인
           </Button>
-          <div
+          {/* <div
             className={cx("reset-password")}
             onClick={() => {
               nav("/reset-password");
             }}
           >
             비밀번호를 잊으셨나요?
-          </div>
+          </div> */}
           <div
             className={cx("register")}
             onClick={() => {

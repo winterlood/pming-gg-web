@@ -1,6 +1,7 @@
 .container {
   padding-top: 20px;
   padding-bottom: 20px;
+  box-sizing: border-box;
 
   display: flex;
   flex-direction: column;
@@ -10,7 +11,6 @@
   .header {
     height: 50px;
     .inner {
-      width: var(--screen-size);
       margin: 0 auto;
       height: 50px;
 

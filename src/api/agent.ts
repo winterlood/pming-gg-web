@@ -14,8 +14,10 @@ export const stroageAgent = axios.create({
 });
 
 const agent = axios.create({
-  baseURL: "http://localhost:1337/api",
-  // baseURL: "http://34.64.92.51:1337/api",
+  baseURL:
+    process.env.NODE_ENV === "developement"
+      ? "http://34.64.92.51:1337/api"
+      : "http://localhost:1337/api",
 });
 
 agent.interceptors.request.use((config) => {
@@ -29,7 +31,6 @@ agent.interceptors.request.use((config) => {
 agent.interceptors.response.use(
   (res) => res,
   function (error) {
-    // Do something with response error
     return Promise.reject(error.response.data.error.message);
   }
 );

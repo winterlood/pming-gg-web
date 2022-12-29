@@ -1,13 +1,11 @@
 import style from "./JobListPage.module.scss";
 import classNames from "classnames/bind";
 import Layout from "@layout/Layout";
-import IconButton from "@components/IconButton";
 import withOnlyProfiledUser from "@hoc/withOnlyProfiledUser";
 import useGetRecommendedJobPost from "@hooks/useGetRecommendedJobPost";
 import JobPostItem from "@components/JobPostItem";
 import { useNavigate } from "react-router-dom";
 import { useState } from "react";
-import { BaseInput } from "@components/Input";
 import useDebounce from "@hooks/useDebounce";
 import { Alert } from "@mui/material";
 const cx = classNames.bind(style);
