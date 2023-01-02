@@ -56,13 +56,22 @@ body {
 :root {
   font-size: 15px;
 
-  --font-h1: 26px;
-  --font-h2: 22px;
-  --font-h3: 20px;
-  --font-h4: 18px;
-  --font-h5: 16px;
-  --font-h6: 14px;
-  --font-h7: 12px;
+  @media screen and (min-width: 481px) {
+    --font-h1: 26px;
+    --font-h2: 22px;
+    --font-h3: 20px;
+    --font-h4: 18px;
+    --font-h5: 14px;
+    --font-h6: 12px;
+  }
+  @media screen and (max-width: 480px) {
+    --font-h1: 24px;
+    --font-h2: 20px;
+    --font-h3: 18px;
+    --font-h4: 16px;
+    --font-h5: 14px;
+    --font-h6: 10px;
+  }
 
   --color-primary: #3a7eff;
   --color-secondary: #eaf1ff;

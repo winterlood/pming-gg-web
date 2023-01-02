@@ -45,6 +45,7 @@
       display: flex;
       gap: 10px;
       .info-item {
+        font-size: var(--font-h5);
         background-color: var(--color-secondary);
         color: var(--color-primary);
         border-radius: 40px;
