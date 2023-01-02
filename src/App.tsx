@@ -20,6 +20,8 @@ import ContactPage from "@pages/ContactPage";
 import MagazineDetailPage from "@pages/MagazineDetailPage";
 import MagazineListPage from "@pages/MagazineListPage";
 import TermPage from "@pages/TermPage";
+import ForgotPasswordPage from "@pages/ForgotPasswordPage";
+import ResetPasswordPage from "@pages/ResetPasswordPage";
 
 function App() {
   const location = useLocation();
@@ -75,6 +77,8 @@ function App() {
         <Route path="/magazine" element={<MagazineListPage />} />
         <Route path="/magazine/:id" element={<MagazineDetailPage />} />
         <Route path="/term" element={<TermPage />} />
+        <Route path="/forgotpassword" element={<ForgotPasswordPage />} />
+        <Route path="/reset" element={<ResetPasswordPage />} />
       </Routes>
     </div>
   );
