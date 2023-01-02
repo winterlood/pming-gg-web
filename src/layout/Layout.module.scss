@@ -43,8 +43,12 @@
     flex: 1;
   }
   .footer {
+    display: flex;
+    flex-direction: column;
+
+    background-color: rebeccapurple;
     position: fixed;
-    height: 80px;
+    height: 70px;
     bottom: 0px;
     left: 0px;
     right: 0px;
