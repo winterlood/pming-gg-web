@@ -12,7 +12,7 @@ export default function useRegisterMutation(): UseMutationResult<
     onError: (err) => {
       switch (err as unknown as string) {
         case "Email or Username are already taken":
-          alert("이메일이나 닉네임이 이미 존재합니다");
+          alert("입력하신 이메일로 등록된 회원정보가 존재합니다");
           break;
         default:
           alert(
