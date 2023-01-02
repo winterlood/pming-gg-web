@@ -12,8 +12,13 @@ const scope = [
   "write:org",
 ].join(" ");
 
+const host =
+  process.env.NODE_ENV === "production"
+    ? "https://pminggg.web.app"
+    : "http://localhost:300";
+
 const githubHref = `
-          https://github.com/login/oauth/authorize?client_id=40f478959240a18c7c53&redirect_uri=http://localhost:3000/githubconnect&scope=${scope}
+          https://github.com/login/oauth/authorize?client_id=40f478959240a18c7c53&redirect_uri=${host}/githubconnect&scope=${scope}
           `;
 
 export const githubOAuthLink = githubHref;

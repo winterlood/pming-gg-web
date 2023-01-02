@@ -1,4 +1,4 @@
-import axios, { AxiosRequestConfig } from "axios";
+import axios from "axios";
 
 function getToken() {
   try {
@@ -10,14 +10,14 @@ function getToken() {
 }
 
 export const stroageAgent = axios.create({
-  baseURL: "https://devstu.fdsafdsa.shop/pmingg",
+  baseURL: "https://pming.fdsafdsa.shop/pmingg",
 });
 
 const agent = axios.create({
   baseURL:
-    process.env.NODE_ENV === "developement"
-      ? "http://34.64.92.51:1337/api"
-      : "http://localhost:1337/api",
+    process.env.NODE_ENV === "production"
+      ? "https://pming.fdsafdsa.shop/api"
+      : "http://192.168.0.13:1337/api",
 });
 
 agent.interceptors.request.use((config) => {
