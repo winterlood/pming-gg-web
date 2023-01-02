@@ -19,6 +19,7 @@ import DirectOfferPage from "@pages/DirectOfferPage";
 import ContactPage from "@pages/ContactPage";
 import MagazineDetailPage from "@pages/MagazineDetailPage";
 import MagazineListPage from "@pages/MagazineListPage";
+import TermPage from "@pages/TermPage";
 
 function App() {
   const location = useLocation();
@@ -73,6 +74,7 @@ function App() {
         <Route path="/contact/:id" element={<ContactPage />} />
         <Route path="/magazine" element={<MagazineListPage />} />
         <Route path="/magazine/:id" element={<MagazineDetailPage />} />
+        <Route path="/term" element={<TermPage />} />
       </Routes>
     </div>
   );
