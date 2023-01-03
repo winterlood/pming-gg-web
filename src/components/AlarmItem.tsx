@@ -38,10 +38,7 @@ export default function AlarmItem(props: Props) {
       </div>
       <div className={cx("info_col")}>
         <div className={cx("title_row")}>
-          <div className={cx("title")}>
-            {msg.title}
-            {/* {!props.is_checked && <div className={cx("new_ellipse")}></div>} */}
-          </div>
+          <div className={cx("title")}>{msg.title}</div>
           <div className={cx("createdAt")}>
             {new Date(props.createdAt).toLocaleDateString()}
           </div>

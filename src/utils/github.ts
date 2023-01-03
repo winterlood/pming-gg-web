@@ -15,7 +15,7 @@ const scope = [
 const host =
   process.env.NODE_ENV === "production"
     ? "https://pminggg.web.app"
-    : "http://localhost:300";
+    : "http://localhost:3000";
 
 const githubHref = `
           https://github.com/login/oauth/authorize?client_id=40f478959240a18c7c53&redirect_uri=${host}/githubconnect&scope=${scope}

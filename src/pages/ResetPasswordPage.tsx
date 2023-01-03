@@ -7,7 +7,7 @@ import { regexPattern } from "@utils/regex";
 import classNames from "classnames/bind";
 import { useRef } from "react";
 import { Controller, useForm } from "react-hook-form";
-import { useNavigate, useSearchParams } from "react-router-dom";
+import { useSearchParams } from "react-router-dom";
 import style from "./ResetPasswordPage.module.scss";
 
 const cx = classNames.bind(style);
@@ -16,7 +16,6 @@ export default function ResetPasswordPage() {
   const [searchParams] = useSearchParams();
   const code = searchParams.get("code");
 
-  const nav = useNavigate();
   const { handleSubmit, control } = useForm();
   const submitRef = useRef(null);
   const { mutate, isLoading } = useResetPasswordMutation();

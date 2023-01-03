@@ -19,5 +19,6 @@ const queryKey = {
   getNotionPageInfo: (id: string) => ["notionPageInfo", id],
   getAlarms: ["alarm"],
   getNewAlarmCount: ["newAlarmCount"],
+  getOutJobPost: ["getOutJobPost"],
 };
 export default queryKey;

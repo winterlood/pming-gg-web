@@ -23,7 +23,10 @@ export default async function uploadFile(
   if (compreseedFile) {
     const form = new FormData();
     form.append("image", compreseedFile);
-    return stroageAgent.post("upload", form).then((data) => data.data);
+    return stroageAgent
+      .post("upload", form)
+      .then((data) => data.data)
+      .catch((err) => console.log(err));
   } else {
     return null;
   }

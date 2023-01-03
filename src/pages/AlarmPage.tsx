@@ -9,6 +9,7 @@ const cx = classNames.bind(style);
 
 function AlarmPage() {
   const { data, isLoading } = useGetAlarmQuery({ refetchOnMount: true });
+  const filteredData = data && data.filter((it) => it.job_post && it.send_user);
   return (
     <Layout
       header={{
@@ -19,8 +20,8 @@ function AlarmPage() {
     >
       <div className={cx("container")}>
         <div className={cx("body")}>
-          {data && data.length > 0 ? (
-            data.map((it) => <AlarmItem key={it.id} {...it} />)
+          {filteredData && filteredData.length > 0 ? (
+            filteredData.map((it) => <AlarmItem key={it.id} {...it} />)
           ) : (
             <Alert severity={"info"}>아직 알림이 없습니다</Alert>
           )}

@@ -13,7 +13,6 @@ import { api_types } from "@types";
 import GithubGeneralStatChart from "@components/GithubGeneralStatChart";
 import GitHubLanaguageChart from "@components/GitHubLanaguageChart";
 import RepoItem from "@components/RepoItem";
-import useGetJobPostQuery from "@hooks/useGetJobPostByUserIdQuery";
 import JobPostItem from "@components/JobPostItem";
 import useGetApplyQuery from "@hooks/useGetApplyQuery";
 import useGetJobPostByUserIdQuery from "@hooks/useGetJobPostByUserIdQuery";
@@ -289,6 +288,23 @@ function ProfilePage() {
               </div>
             </section>
 
+            {
+              // @ts-ignore
+              !window.ReactNativeWebView && isMe && userType === "business" && (
+                <section>
+                  <Button
+                    onClick={() => {
+                      window.open(
+                        `https://checkout.stripe.com/c/pay/cs_test_a11iBVj7Xn2ebvS57f8aX3Vq34UR8TglZuqJQytoQxaX59b1W1SLD8LoUN#fidkdWxOYHwnPyd1blpxYHZxWjA0SU5dak9NNEFuYnNBNk4xYHZWQWdzX2hiRHU8Zn09aUhJZ29sbWNuazdBXWRgfDJTa31CN2dTQEM0RD1XYkNraEZ8b2ZgS2NPV2M9Y2tfaE9ybEtjYUZrNTU1QEtzbkgxbicpJ3VpbGtuQH11anZgYUxhJz8ncWB2cVo3PWozd3dgSl9hMjRhM1AydnYneCUl`,
+                        "_blank"
+                      );
+                    }}
+                  >
+                    구독 정보 갱신
+                  </Button>
+                </section>
+              )
+            }
             {isMe && (
               <section>
                 <Button

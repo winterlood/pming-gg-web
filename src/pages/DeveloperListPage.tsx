@@ -38,6 +38,7 @@ function DeveloperListPage() {
         {developerList && developerList?.length > 0 ? (
           developerList?.map((it) => (
             <DeveloperItem
+              key={it.id}
               id={it.id}
               avatar_url={it.avatar_url}
               name={it.name}

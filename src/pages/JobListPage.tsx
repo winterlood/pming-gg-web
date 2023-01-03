@@ -8,6 +8,8 @@ import { useNavigate } from "react-router-dom";
 import { useState } from "react";
 import useDebounce from "@hooks/useDebounce";
 import { Alert } from "@mui/material";
+import useGetOutJobPostQuery from "@hooks/useGetOutJobPostQuery";
+import { api_types, common_types } from "@types";
 const cx = classNames.bind(style);
 
 function JobListPage() {
@@ -20,6 +22,8 @@ function JobListPage() {
       refetchOnMount: true,
     }
   );
+
+  const { data: outJobList } = useGetOutJobPostQuery();
 
   return (
     <Layout
@@ -56,6 +60,32 @@ function JobListPage() {
             ) : (
               <Alert severity={"info"}>아직 등록된 공고가 없습니다</Alert>
             )}
+          </section>
+        )}
+
+        {outJobList && (
+          <section className={cx("section-list")}>
+            <div className={cx("section_header")}>외부 채용 공고</div>
+            {outJobList.map((it) => (
+              <JobPostItem
+                id={it.id}
+                thumbnail_url={it.title_img.thumb}
+                duty={it.position}
+                salary={"???"}
+                work_type={"full-time"}
+                location={"???"}
+                requirements={[]}
+                author={
+                  {
+                    avatar_url: it.logo_img.origin,
+                    name: it.company.name,
+                  } as api_types.UserProfile & common_types.BusinessUserInfo
+                }
+                onClick={() => {
+                  window.open(`https://www.wanted.co.kr/wd/${it.id}`);
+                }}
+              />
+            ))}
           </section>
         )}
       </main>

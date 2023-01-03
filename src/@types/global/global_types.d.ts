@@ -1,5 +1,21 @@
 declare module "@types" {
   export namespace api_types {
+    interface OutJobPost {
+      id: string;
+      position: string;
+      company: {
+        name: string;
+      };
+      logo_img: {
+        origin: string;
+        thumb: string;
+      };
+      title_img: {
+        origin: string;
+        thumb: string;
+      };
+    }
+
     interface Alarm {
       id: string;
       is_checked: boolean;

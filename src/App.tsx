@@ -22,24 +22,32 @@ import MagazineListPage from "@pages/MagazineListPage";
 import TermPage from "@pages/TermPage";
 import ForgotPasswordPage from "@pages/ForgotPasswordPage";
 import ResetPasswordPage from "@pages/ResetPasswordPage";
+import { useSelector } from "react-redux";
+import { RootState } from "@store/createStore";
+import { postMessageToWebview } from "@utils/webview";
 
 function App() {
+  const auth = useSelector((v: RootState) => v.auth);
   const location = useLocation();
   const pathname = location.pathname;
   useEffect(() => {
     const stackLength: number = window.history.length;
-    // @ts-ignore
-    if (window.ReactNativeWebView) {
-      // @ts-ignore
-      window.ReactNativeWebView.postMessage(
-        JSON.stringify({
-          type: "nav",
-          location: pathname,
-          stackLength: stackLength,
-        })
-      );
-    }
+    postMessageToWebview({
+      type: "nav",
+      location: pathname,
+      stackLength: stackLength,
+    });
   }, [pathname]);
+
+  useEffect(() => {
+    if (auth) {
+      postMessageToWebview({
+        type: "push_topic",
+        id: auth.user.id,
+      });
+    }
+  }, [auth]);
+
   return (
     <div className="App">
       <Routes>
