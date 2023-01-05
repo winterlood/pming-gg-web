@@ -25,6 +25,7 @@ import ResetPasswordPage from "@pages/ResetPasswordPage";
 import { useSelector } from "react-redux";
 import { RootState } from "@store/createStore";
 import { postMessageToWebview } from "@utils/webview";
+import LogoutPage from "@pages/LogoutPage";
 
 function App() {
   const auth = useSelector((v: RootState) => v.auth);
@@ -87,6 +88,7 @@ function App() {
         <Route path="/term" element={<TermPage />} />
         <Route path="/forgotpassword" element={<ForgotPasswordPage />} />
         <Route path="/reset" element={<ResetPasswordPage />} />
+        <Route path="/logout" element={<LogoutPage />} />
       </Routes>
     </div>
   );
