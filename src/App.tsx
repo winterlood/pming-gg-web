@@ -26,6 +26,7 @@ import { useSelector } from "react-redux";
 import { RootState } from "@store/createStore";
 import { postMessageToWebview } from "@utils/webview";
 import LogoutPage from "@pages/LogoutPage";
+import NotionProfilePage from "@pages/NotionProfilePage";
 
 function App() {
   const auth = useSelector((v: RootState) => v.auth);
@@ -89,6 +90,7 @@ function App() {
         <Route path="/forgotpassword" element={<ForgotPasswordPage />} />
         <Route path="/reset" element={<ResetPasswordPage />} />
         <Route path="/logout" element={<LogoutPage />} />
+        <Route path="/noprofile" element={<NotionProfilePage />} />
       </Routes>
     </div>
   );

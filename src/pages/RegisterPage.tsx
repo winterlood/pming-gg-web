@@ -1,6 +1,6 @@
 import userRegisterMutation from "@hooks/useRegisterMutation";
 import { Controller, useForm } from "react-hook-form";
-import { useNavigate } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import Layout from "@layout/Layout";
 import IconButton from "@components/IconButton";
 
@@ -12,7 +12,7 @@ import {
   PasswordInput,
 } from "@components/Input";
 import Button from "@components/Button";
-import { useRef } from "react";
+import { useRef, useState } from "react";
 import { regexPattern } from "@utils/regex";
 const cx = classNames.bind(style);
 
@@ -22,8 +22,14 @@ function RegisterPage() {
   const submitRef = useRef(null);
 
   const { handleSubmit, control } = useForm();
+  const [isAgree, setIsAgree] = useState(false);
   const onSubmit = (data: any) => {
     const { email, password } = data;
+
+    if (!isAgree) {
+      alert("개인정보 처리방침 및 이용약관에 동의해주세요");
+      return;
+    }
 
     if (!email.match(regexPattern.email)) {
       alert("이메일 형식에 맞게 입력해주세요");
@@ -128,6 +134,21 @@ function RegisterPage() {
                 <input ref={submitRef} type={"submit"} />
               </div>
             </form>
+          </section>
+          <section className={cx("section-submit")}>
+            <div>
+              <Link to={"/term"}>이용약관 및 개인정보처리방침</Link>
+            </div>
+            <div>
+              위 약관에 동의합니다
+              <input
+                checked={isAgree}
+                onChange={() => {
+                  setIsAgree(!isAgree);
+                }}
+                type={"checkbox"}
+              />
+            </div>
           </section>
           <section className={cx("section-submit")}>
             <Button

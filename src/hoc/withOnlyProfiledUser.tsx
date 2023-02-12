@@ -9,9 +9,9 @@ function withOnlyProfiledUser<P extends object>(
   const ProtectedComponent = ({ ...props }) => {
     const auth = useSelector((v: RootState) => v.auth);
     if (!auth) {
-      return <Navigate replace to="/login" />;
+      return <Navigate replace={true} to="/login" />;
     } else if (!auth.user.is_profile_created) {
-      return <Navigate replace to="/profile/create" />;
+      return <Navigate replace={true} to="/profile/create" />;
     } else {
       return <WrappedComponent {...(props as P)} />;
     }

@@ -1,14 +1,26 @@
+import IconButton from "@components/IconButton";
 import Layout from "@layout/Layout";
 import classNames from "classnames/bind";
+import { useNavigate } from "react-router-dom";
 import style from "./TermPage.module.scss";
 
 const cx = classNames.bind(style);
 
 export default function TermPage() {
+  const nav = useNavigate();
   return (
     <Layout
       header={{
         pageName: "이용 약관",
+        leftButton: (
+          <IconButton
+            type={"light"}
+            icon={"goback"}
+            onClick={() => {
+              nav("/login");
+            }}
+          />
+        ),
       }}
     >
       <div className={cx("container")}>

@@ -80,11 +80,13 @@ declare module "@types" {
         id: string;
         location: string;
         name: string;
+        detail_profile_id: string;
       } | null;
       user_detail_business: {
         establishment_date: string;
         capital: number;
         employees: number;
+        detail_profile_id: string;
       } | null;
       github_user: GitHubHistory;
     }

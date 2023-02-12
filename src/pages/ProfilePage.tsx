@@ -158,6 +158,30 @@ function ProfilePage() {
                   )}
                 </>
               )}
+              {userType === "individual" &&
+                profileData.user_detail_individual?.detail_profile_id && (
+                  <Button
+                    onClick={() => {
+                      nav(
+                        `/noprofile?user_id=${id}&profile_id=${profileData.user_detail_individual?.detail_profile_id}`
+                      );
+                    }}
+                  >
+                    상세 프로필
+                  </Button>
+                )}
+              {userType === "business" &&
+                profileData.user_detail_business?.detail_profile_id && (
+                  <Button
+                    onClick={() => {
+                      nav(
+                        `/noprofile?user_id=${id}&profile_id=${profileData.user_detail_business?.detail_profile_id}`
+                      );
+                    }}
+                  >
+                    상세 프로필
+                  </Button>
+                )}
             </section>
             {userType === "business" && (
               <section className={cx("section-jobpost")}>
@@ -219,7 +243,6 @@ function ProfilePage() {
                 )}
               </section>
             ) : null}
-
             <section className={cx("section-github")}>
               <div className={cx("section-header")}>
                 <div className={cx("header-text")}>깃허브 데이터</div>

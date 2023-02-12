@@ -30,7 +30,6 @@ function LoginPage() {
   const onSubmit = (data: any) => {
     mutate(data, {
       onSuccess: (data) => {
-        console.log(data);
         dispatch(login(data.data as common_types.AuthUser));
       },
     });

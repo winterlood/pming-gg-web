@@ -136,6 +136,22 @@ function IndividualUserScene({
           )}
         />
       </LabeledInputContainer>
+      <LabeledInputContainer label="상세 프로필 아이디">
+        <Controller
+          defaultValue=""
+          name="detail_profile_id"
+          control={form.control}
+          rules={{ required: true }}
+          render={(props: any) => (
+            <BaseInput
+              placeholder="상세프로필 페이지 아이디"
+              type="text"
+              value={props.field.value}
+              onChange={props.field.onChange}
+            />
+          )}
+        />
+      </LabeledInputContainer>
       <LabeledInputContainer label="연차">
         <Controller
           defaultValue=""
@@ -196,16 +212,16 @@ function BusinessUserScene({
           )}
         />
       </LabeledInputContainer>
-      <LabeledInputContainer label="홈페이지 주소">
+      <LabeledInputContainer label="상세 프로필 아이디">
         <Controller
           defaultValue=""
-          name="hompage_url"
+          name="detail_profile_id"
           control={form.control}
           rules={{ required: true }}
           render={(props: any) => (
             <BaseInput
-              placeholder="홈페이지 주소"
-              type="url"
+              placeholder="상세 프로필 아이디"
+              type="text"
               value={props.field.value}
               onChange={props.field.onChange}
             />
@@ -364,6 +380,7 @@ function ProfileEditPage() {
       let detailDataObject =
         data.user_detail_business ?? (data.user_detail_individual as Object);
       Object.keys(detailDataObject).forEach((key) => {
+        console.log(key);
         //@ts-ignore
         const value = detailDataObject[key];
         form.setValue(key, value);
@@ -386,12 +403,7 @@ function ProfileEditPage() {
         isValid = false;
       }
     } else if (type === "business") {
-      const businessValues = [
-        "hompage_url",
-        "establishment_date",
-        "capital",
-        "employees",
-      ];
+      const businessValues = ["establishment_date", "capital", "employees"];
       if (
         businessValues.filter((value) => form.getValues(value) === "")
           .length !== 0
