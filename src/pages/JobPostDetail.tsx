@@ -166,6 +166,24 @@ function JobPostDetail() {
             <section className={cx("section-head")}>
               <JobPostItem disabled {...jobPostData} />
             </section>
+            {
+              // @ts-ignore
+              jobPostData.author?.detail_profile_id && (
+                <section className={cx("section-head")}>
+                  <Button
+                    variant={"outlined"}
+                    onClick={() =>
+                      nav(
+                        // @ts-ignore
+                        `/noprofile?user_id=${jobPostData.author.id}&profile_id=${jobPostData.author?.detail_profile_id}`
+                      )
+                    }
+                  >
+                    기업 상세 프로필 보기
+                  </Button>
+                </section>
+              )
+            }
             <section className={cx("section-summary")}>
               <div className={cx("summary-item")}>
                 <div className={cx("label")}>연봉</div>
@@ -256,9 +274,7 @@ function JobPostDetail() {
                           id={it.apply_user.id}
                           avatar_url={it.apply_user.avatar_url}
                           name={it.apply_user.name}
-                          bio={
-                            it.apply_user.user_detail_individual?.bio as string
-                          }
+                          bio={""}
                         />
                       </div>
                     ))}

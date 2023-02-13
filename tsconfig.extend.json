@@ -12,7 +12,8 @@
       "@store/*": ["./store/*"],
       "@layout/*": ["./layout/*"],
       "@types/*": ["./@types/*"],
-      "@utils/*": ["./utils/*"]
+      "@utils/*": ["./utils/*"],
+      "@img/*": ["./img/*"]
     }
   }
 }

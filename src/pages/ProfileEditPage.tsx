@@ -244,7 +244,7 @@ function BusinessUserScene({
           )}
         />
       </LabeledInputContainer>
-      <LabeledInputContainer label="자본금 규모(원)">
+      <LabeledInputContainer label="자본금 규모(만원)">
         <Controller
           defaultValue=""
           name="capital"
@@ -252,7 +252,7 @@ function BusinessUserScene({
           rules={{ required: true }}
           render={(props: any) => (
             <BaseInput
-              placeholder="자본금 규모(원)"
+              placeholder="자본금 규모(만원)"
               type="number"
               value={props.field.value}
               onChange={props.field.onChange}

@@ -18,6 +18,8 @@ import GitHubLanaguageChart from "@components/GitHubLanaguageChart";
 import useGetRecommendedJobPost from "@hooks/useGetRecommendedJobPost";
 import { Alert } from "@mui/material";
 import { githubOAuthLink } from "@utils/github";
+import AdBanner from "@components/AdBanner";
+
 const cx = classNames.bind(style);
 
 function HomeSection(props: {
@@ -194,6 +196,7 @@ function HomePage() {
       footer
     >
       <div className={cx("container")}>
+        <AdBanner />
         <HomeSection
           title="매거진"
           viewMore={{

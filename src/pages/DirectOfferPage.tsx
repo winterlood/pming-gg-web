@@ -82,7 +82,7 @@ function DirectOfferPage() {
       {
         onSuccess: () => {
           alert("성공적으로 제안을 보냈습니다 👍");
-          nav(`/profile/${developerID}`);
+          nav(`/jobpost/${recoPost}`, { replace: true });
         },
         onError: (err) => {
           // @ts-ignore

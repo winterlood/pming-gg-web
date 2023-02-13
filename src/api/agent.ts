@@ -16,12 +16,11 @@ export const stroageAgent = axios.create({
 });
 
 const agent = axios.create({
-  baseURL: "http://localhost:1337/api",
-  // baseURL: !IS_PRODUCTION_SERVER_TEST
-  //   ? process.env.NODE_ENV === "production"
-  //     ? "https://pming.fdsafdsa.shop/api"
-  //     : "http://192.168.0.13:1337/api"
-  //   : "https://pming.fdsafdsa.shop/api",
+  baseURL: !IS_PRODUCTION_SERVER_TEST
+    ? process.env.NODE_ENV === "production"
+      ? "https://pming.fdsafdsa.shop/api"
+      : "http://192.168.0.13:1337/api"
+    : "https://pming.fdsafdsa.shop/api",
 });
 
 agent.interceptors.request.use((config) => {

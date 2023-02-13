@@ -125,7 +125,8 @@ function ProfilePage() {
                 {userType === "business" && (
                   <>
                     <div className={cx("info-item")}>
-                      #<b>{profileData.user_detail_business?.capital}</b>원 보유
+                      #<b>{profileData.user_detail_business?.capital}</b>만원
+                      보유
                     </div>
                     <div className={cx("info-item")}>
                       #<b>{profileData.user_detail_business?.employees}</b>명

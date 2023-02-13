@@ -1,3 +1,5 @@
+declare module "*.png";
+
 declare module "@types" {
   export namespace api_types {
     interface OutJobPost {
